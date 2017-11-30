@@ -1,16 +1,13 @@
 import './../sass/styles.scss';
+import {buttonStart} from './variables';
+import {cleanWindow, showCanvas} from './logic';
 
-const component = () => {
-    const helloWebpack = _.join(_.values({
-        a: 'Hello',
-        b: 'webpack'
-    }), ' ');
-
-    const element = document.createElement('h1');
-
-    element.innerHTML = helloWebpack;
-
-    return element;
+const startGame = function () {
+    cleanWindow();
+    showCanvas();
 };
 
-document.body.appendChild(component());
+
+
+buttonStart.addEventListener('click', startGame);
+requestAnimationFrame()

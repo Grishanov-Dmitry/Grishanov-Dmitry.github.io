@@ -45,8 +45,16 @@ const config = {
                     'resolve-url-loader'
                 ]
             })
-        }]
+        },
+            {
+                test: /\.(jpg|png|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'images/[name].[ext]'
+                },
+            }]
     },
+    watch: true,
     plugins: [
         new webpack.ProvidePlugin({
             _: 'lodash'
