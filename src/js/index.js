@@ -1,6 +1,6 @@
 import './../sass/styles.scss';
-import {buttonStart} from './variables';
-import {cleanWindow, showCanvas} from './logic';
+import {buttonStart, buttonFullScreen} from './variables';
+import {cleanWindow, showCanvas, launchFullScreen} from './logic';
 
 const startGame = function () {
     cleanWindow();
@@ -10,4 +10,4 @@ const startGame = function () {
 
 
 buttonStart.addEventListener('click', startGame);
-requestAnimationFrame()
+buttonFullScreen.addEventListener('click', launchFullScreen);
