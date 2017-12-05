@@ -2,7 +2,7 @@
  * Created by Dima on 30.11.2017.
  */
 
-import {wrapper, canvas, context, buttonFullScreen} from './variables';
+import {wrapper, canvas, context, buttonFullScreen} from './consts';
 
 
 export const cleanWindow = function () {
@@ -22,3 +22,5 @@ export const launchFullScreen = function () {
         canvas.webkitRequestFullScreen();
     }
 };
+
+
