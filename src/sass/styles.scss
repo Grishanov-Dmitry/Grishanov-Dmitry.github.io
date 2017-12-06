@@ -14,8 +14,8 @@ html {
 }
 
 body {
-  background: url("../../public/images/bg-in-game.jpg");
-  background-size: 100% 100%;
+  //background: url("../../public/images/bg-in-game.jpg");
+  //background-size: 100% 100%;
 }
 
 a {
@@ -71,6 +71,14 @@ a {
     }
 
   }
+}
+
+.loading {
+  display: none;
+  width: 200px;
+  height: 200px;
+  color: red;
+  font-size: 2rem;
 }
 
 .canvas {

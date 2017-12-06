@@ -2,7 +2,7 @@
  * Created by Dima on 30.11.2017.
  */
 
-import {wrapper, canvas, context, buttonFullScreen} from './consts';
+import {wrapper, canvas, context, buttonFullScreen, pattern, bgInGame, canvasWidth, canvasHeight} from './consts';
 
 
 export const cleanWindow = function () {
@@ -24,3 +24,12 @@ export const launchFullScreen = function () {
 };
 
 
+export const createBg = function () {
+    // let image = new Image();
+    // image.src = bgInGame;
+    context.fillStyle = pattern;
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
+
+};
+
+createBg();

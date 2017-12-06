@@ -1,16 +1,29 @@
 import './../sass/styles.scss';
-import {buttonStart, buttonFullScreen, context} from './consts';
-import {cleanWindow, showCanvas, launchFullScreen} from './logic';
+import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl} from './consts';
+import {cleanWindow, showCanvas, launchFullScreen, } from './logic';
 import {loadImage} from './loaders';
 import {mario} from './objectOfEntities';
+import {imagesLoader,hideLoading} from './imagesLoader';
+import constructorOfEntities from './constructorOfEntities';
 
 let lastTime = undefined;
 
+
+
 const startGame = function () {
     cleanWindow();
+    imagesLoader(allSpritesUrl)
+        .then(
+            hideLoading(),
+            (reason) => alert(reason + 'ошибка') // To change after
+        );
+
     showCanvas();
+    // mario.define();
     // mainLoop(); It's need to show
 };
+
+startGame(); // Delete after connect the button Start
 
 const requestAnimFrame = (function(){
     return window.requestAnimationFrame       ||
@@ -26,7 +39,6 @@ const requestAnimFrame = (function(){
 //It's a permanent loop
 const mainLoop = function () {
     let now = Date.now();
-    debugger;
     let dt = (now - lastTime) / 1000.0;
 
     // update(dt);

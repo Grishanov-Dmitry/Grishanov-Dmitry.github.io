@@ -22,13 +22,13 @@ function foo(url) {
     img.src = url;
 
     img.onload = function () {
-        context.drawImage(img, 0, 0, 18, 30, 0, 0, 46, 60);
+        context.drawImage(img, 0, 0, 25, 40, 0, 0, 46, 60);
     }
 
 }
 // context.drawImage(0, 0, 18, 30, 0, coordMarioStart, 46, 60, spriteMarioUrl);
 
-foo(spriteMarioUrl);
+// foo(spriteMarioUrl);
 
 
 const moveMario = function (src, x1) {
