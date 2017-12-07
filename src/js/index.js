@@ -1,29 +1,13 @@
 import './../sass/styles.scss';
 import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl} from './consts';
-import {cleanWindow, showCanvas, launchFullScreen, } from './logic';
-import {loadImage} from './loaders';
-import {mario} from './objectOfEntities';
+import {cleanWindow, showCanvas, launchFullScreen, createBg, update} from './logic';
+// import {loadImage} from './loaders';
+import {mario, drawAllElem} from './objectOfEntities';
 import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
+import {keys} from './keys';
 
-let lastTime = undefined;
-
-
-
-const startGame = function () {
-    cleanWindow();
-    imagesLoader(allSpritesUrl)
-        .then(
-            hideLoading(),
-            (reason) => alert(reason + 'ошибка') // To change after
-        );
-
-    showCanvas();
-    // mario.define();
-    // mainLoop(); It's need to show
-};
-
-startGame(); // Delete after connect the button Start
+var lastTime;
 
 const requestAnimFrame = (function(){
     return window.requestAnimationFrame       ||
@@ -40,15 +24,25 @@ const requestAnimFrame = (function(){
 const mainLoop = function () {
     let now = Date.now();
     let dt = (now - lastTime) / 1000.0;
-
+    // drawAllElem();
     // update(dt);
     // render();
-
+    // console.log('loop');
     lastTime = now;
     requestAnimFrame(mainLoop);
 };
 
-mainLoop();
+// Game starts after press buttonStart
+const startGame = function () {
+    cleanWindow();
+    imagesLoader(allSpritesUrl)
+        .then(() => showCanvas())
+        .then(() => drawAllElem())
+        .then(() => mainLoop());
+
+
+};
+
 
 buttonStart.addEventListener('click', startGame);
 buttonFullScreen.addEventListener('click', launchFullScreen);

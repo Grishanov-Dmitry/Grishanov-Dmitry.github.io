@@ -23,13 +23,45 @@ export const launchFullScreen = function () {
     }
 };
 
-
-export const createBg = function () {
-    // let image = new Image();
-    // image.src = bgInGame;
-    context.fillStyle = pattern;
-    context.fillRect(0, 0, canvasWidth, canvasHeight);
-
+export const showLoading = function () {
+    loadingWindiw.classList.add('displayBlock');
 };
 
-createBg();
+export const hideLoading = function () {
+    loadingWindiw.classList.toggle('displayBlock');
+};
+
+// let gameTime = 0;
+//
+// export const update = function (dt) {
+//     gameTime += dt;
+//     console.log(gameTime);
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export const createBg = function () {
+//     let image = new Image();
+//     image.src = bgInGame;
+//     const pattern = context.createPattern(image, 'no-repeat');
+//     context.fillStyle = pattern;
+//     context.fillRect(0, 0, canvasWidth, canvasHeight);
+// };
+

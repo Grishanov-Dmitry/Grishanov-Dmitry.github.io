@@ -4,27 +4,32 @@
 
 import {allSpritesUrl, loadingWindiw} from  './consts';
 
-
-export const imagesLoader = function (arrWithUrls) {
-    debugger;
-    return new Promise((resolve, rejected) => {
-        allSpritesUrl.forEach(item => {
-            let image = new Image();
-            image.src = item;
-            image.addEventListener('load',() => {
-                showLoading();
-            });
-        });
-        resolve('Все Ок');
-            rejected('ошибка')
-    });
+//Use this function for load all sprites before the game
+export const imagesLoader = (arr) => {
+    const promises = arr.map((item) => new Promise(resolve => {
+        const image = new Image();
+        image.src = item;
+        image.addEventListener('load', () => {
+            resolve();
+        })
+    }));
+    return Promise.all(promises);
 };
 
-export const showLoading = function () {
-    loadingWindiw.classList.add('displayBlock');
-};
 
-export const hideLoading = function () {
-    loadingWindiw.classList.toggle('displayBlock');
-};
+
+
+
+
+
+
+// export const imagesLoader = function (arr) {
+//     arr.forEach(item => {
+//             let image = new Image();
+//             image.src = item;
+//             image.addEventListener('load',() => {
+//                 // showLoading();
+//             });
+//         });
+// };
 
