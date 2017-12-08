@@ -39,6 +39,9 @@ export const entities = {};
 export const coordMarioStart = [200,100];
 
 
+export let counter = 0;
+
+
 
 
 

@@ -2,9 +2,9 @@
  * Created by Dima on 06.12.2017.
  */
 import constructorOfEntities from './constructorOfEntities';
-import {coordMarioStart, spriteMarioUrl, entities, context} from './consts';
+import {coordMarioStart, spriteMarioUrl, entities, context, counter} from './consts';
 
-let count = 0;
+
 let start = 120;
 export const drawAllElem = function () {
     entities.mario = new constructorOfEntities(spriteMarioUrl, start, 4, 18, 30, 0, coordMarioStart, 46, 60);

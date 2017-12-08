@@ -1,5 +1,5 @@
 import './../sass/styles.scss';
-import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl} from './consts';
+import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl, counter} from './consts';
 import {cleanWindow, showCanvas, launchFullScreen, createBg, update} from './logic';
 // import {loadImage} from './loaders';
 import {mario, drawAllElem} from './objectOfEntities';
@@ -22,6 +22,7 @@ const requestAnimFrame = (function(){
 
 //It's a permanent loop
 const mainLoop = function () {
+    count++;
     let now = Date.now();
     let dt = (now - lastTime) / 1000.0;
     // drawAllElem();
