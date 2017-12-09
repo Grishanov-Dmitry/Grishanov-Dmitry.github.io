@@ -2,9 +2,9 @@
  * Created by Dima on 07.12.2017.
  */
 
-import {} from './objectOfEntities';
+import {} from './moveEntity';
 import {entities, coordMarioStart} from './consts';
-import {drawAllElem} from './objectOfEntities';
+import {moveMarioRight, stopMario, moveMarioLeft} from './moveEntity';
 
 let keyDown = null;
 
@@ -26,11 +26,11 @@ export const isPressS = function () {
 };
 
 export const isPressA = function () {
-
+    moveMarioLeft();
 };
 
 export const isPressD = function () {
-    drawAllElem();
+    moveMarioRight();
 };
 
 export const isPressSpace = function () {
@@ -40,6 +40,10 @@ export const isPressSpace = function () {
 export const isPressInter = function () {
 
 };
+
+window.addEventListener('keyup', (event) => stopMario());
+
+
 
 window.addEventListener('keydown', (event) => {
     switch(event.keyCode) {
@@ -64,6 +68,6 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
-window.addEventListener('keyup', (event) => console.log('up'));
+
 
 

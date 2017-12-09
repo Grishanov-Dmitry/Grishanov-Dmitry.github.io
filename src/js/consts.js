@@ -20,12 +20,12 @@ export const canvasHeight = canvas.height;
 //Images
 export const spriteMarioUrl = '../public/images/mario-sprite.png';
 export const sprite1Url = '../public/images/sprite-1.png';
-export const sprite2Url = '../public/images/sprite-2.png';
+export const sprite3Url = '../public/images/sprite-3.png';
 export const bgInGame = '../public/images/bg-in-game.jpg';
 export const allSpritesUrl = [
     '../public/images/mario-sprite.png',
     '../public/images/sprite-1.png',
-    '../public/images/sprite-2.png',
+    '../public/images/sprite-3.png',
     '../public/images/bg-in-game.jpg'
 ];
 
@@ -36,10 +36,10 @@ export const entities = {};
 
 
 
-export const coordMarioStart = [200,100];
+export const coordMarioStart = [200,550];
 
 
-export let counter = 0;
+
 
 
 

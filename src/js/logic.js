@@ -3,6 +3,7 @@
  */
 
 import {wrapper, canvas, context, buttonFullScreen, pattern, bgInGame, canvasWidth, canvasHeight} from './consts';
+import {counter} from './index';
 
 
 export const cleanWindow = function () {
@@ -31,12 +32,40 @@ export const hideLoading = function () {
     loadingWindiw.classList.toggle('displayBlock');
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // let gameTime = 0;
 //
 // export const update = function (dt) {
 //     gameTime += dt;
 //     console.log(gameTime);
 // };
+
 
 
 

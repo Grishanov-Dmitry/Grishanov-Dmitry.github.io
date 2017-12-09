@@ -1,13 +1,16 @@
 import './../sass/styles.scss';
-import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl, counter} from './consts';
+import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl} from './consts';
 import {cleanWindow, showCanvas, launchFullScreen, createBg, update} from './logic';
 // import {loadImage} from './loaders';
-import {mario, drawAllElem} from './objectOfEntities';
+import {mario, moveMarioRight, drawMario} from './moveEntity';
 import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
 import {keys} from './keys';
+import {drawMap} from './drawMap';
 
-var lastTime;
+export let counter = 0;
+
+
 
 const requestAnimFrame = (function(){
     return window.requestAnimationFrame       ||
@@ -22,14 +25,16 @@ const requestAnimFrame = (function(){
 
 //It's a permanent loop
 const mainLoop = function () {
-    count++;
-    let now = Date.now();
-    let dt = (now - lastTime) / 1000.0;
+    // console.log(counter);
+    counter === 24 ? counter = 1 : counter++;
+
+    // let now = Date.now();
+    // let dt = (now - lastTime) / 1000.0;
     // drawAllElem();
     // update(dt);
     // render();
     // console.log('loop');
-    lastTime = now;
+    // lastTime = now;
     requestAnimFrame(mainLoop);
 };
 
@@ -38,10 +43,9 @@ const startGame = function () {
     cleanWindow();
     imagesLoader(allSpritesUrl)
         .then(() => showCanvas())
-        .then(() => drawAllElem())
+        .then(() => drawMap())
+        .then(() => drawMario())
         .then(() => mainLoop());
-
-
 };
 
 
