@@ -6,15 +6,12 @@ import {canvas, context, sprite3Url} from './consts';
 import constructorOfEntities from  './constructorOfEntities';
 import {map1} from './mapLevels';
 
-let arrColor = ['green', 'red'];
-let arrNumber =[0,1];
-
-
-let x = 0;
+let x = 0; //Coordinates when will draw a new image
 let y = 0;
 
-const entity = new Map();
 
+
+//Create a new parts for map
 const brick = new constructorOfEntities(sprite3Url, 798, 5, 32, 30, [x, y], 50, 50);
 const brickQuestionMark = new constructorOfEntities(sprite3Url, 874, 5, 30, 30, [x, y], 50, 50);
 const brickCoin = new constructorOfEntities(sprite3Url, 357, 12, 23, 31, [x, y], 50, 50);
@@ -26,6 +23,10 @@ const brickTurtle = new constructorOfEntities(sprite3Url, 740, 151, 38, 38, [x, 
 const blockEmpty = new constructorOfEntities(sprite3Url, 910, 0, 25, 25, [x, y], 50, 50);
 
 
+//Here we keep the parts of the map
+const entity = new Map();
+
+//Add a new parts in the entity
 entity.set(0, blockEmpty);
 entity.set(1, brick);
 entity.set(2, brickCoin);
@@ -38,7 +39,7 @@ entity.set(8, brickStar);
 
 console.log(entity);
 
-
+//Draws map
 export const drawMap = function () {
     map1.forEach((item, i) => {
         item.forEach((itemInner) => {
