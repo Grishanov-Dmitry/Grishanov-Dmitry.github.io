@@ -5,11 +5,12 @@
 import {canvas, context, sprite3Url} from './consts';
 import constructorOfEntities from  './constructorOfEntities';
 import {map1} from './mapLevels';
+import {counter} from './index';
 
 let x = 0; //Coordinates when will draw a new image
 let y = 0;
 
-
+let arr = [ ];
 
 //Create a new parts for map
 const brick = new constructorOfEntities(sprite3Url, 798, 5, 32, 30, [x, y], 50, 50);
@@ -23,7 +24,7 @@ const brickTurtle = new constructorOfEntities(sprite3Url, 740, 151, 38, 38, [x, 
 const blockEmpty = new constructorOfEntities(sprite3Url, 910, 0, 25, 25, [x, y], 50, 50);
 
 
-
+// console.log(brickStar);
 
 //Here we keep the parts of the map
 const entity = new Map();
@@ -41,20 +42,7 @@ entity.set(8, brickStar);
 
 
 
-console.log(entity);
-
-//Draws map
-export const drawMap = function () {
-    map1.forEach((item, i) => {
-        item.forEach((itemInner) => {
-            entity.get(itemInner).createElem(x, y);
-            x += 51;
-        });
-        x = 0;
-        y += 51;
-    });
-};
-
+// console.log(entity);
 
 
 export const moveBrickStar = function () {
@@ -67,4 +55,21 @@ export const moveBrickStar = function () {
         }
     }
 };
+
+//Draws map
+export const drawMap = function () {
+    map1.forEach((item) => {
+        item.forEach((itemInner) => {
+            entity.get(itemInner).createElem(x, y);
+            // console.log(elem);
+            x += 51;
+        });
+        x = 0;
+        y += 51;
+    });
+};
+
+
+
+
 

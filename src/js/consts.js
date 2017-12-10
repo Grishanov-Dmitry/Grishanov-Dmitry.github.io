@@ -41,3 +41,4 @@ export const coordMarioStart = [200,550];
 
 
 
+

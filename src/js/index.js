@@ -1,15 +1,15 @@
 import './../sass/styles.scss';
 import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl} from './consts';
 import {cleanWindow, showCanvas, launchFullScreen, createBg, update} from './logic';
-// import {loadImage} from './loaders';
+import {loadImage, create} from './loaders';
 import {mario, moveMarioRight, drawMario} from './moveEntity';
 import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
-import {keys} from './keys';
-import {drawMap} from './drawMap';
+import {keys} from './keysEvents';
+import {drawMap, moveBrickStar} from './drawMap';
 
 export let counter = 0;
-
+create();
 
 
 const requestAnimFrame = (function(){
@@ -25,16 +25,9 @@ const requestAnimFrame = (function(){
 
 //It's a permanent loop
 const mainLoop = function () {
-    // console.log(counter);
     counter === 24 ? counter = 1 : counter++;
-
-    // let now = Date.now();
-    // let dt = (now - lastTime) / 1000.0;
+    moveBrickStar();
     // drawAllElem();
-    // update(dt);
-    // render();
-    // console.log('loop');
-    // lastTime = now;
     requestAnimFrame(mainLoop);
 };
 
