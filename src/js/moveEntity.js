@@ -2,20 +2,21 @@
  * Created by Dima on 06.12.2017.
  */
 import constructorOfEntities from './constructorOfEntities';
-import {coordMarioStart, spriteMarioUrl, entities, context} from './consts';
+import {coordMarioStart, spriteMarioUrl, context} from './consts';
 import {counter} from './index';
 
-
+export const entities = {};
 
 export const drawMario = function () {
     entities.mario = new constructorOfEntities(spriteMarioUrl, 102, 4, 18, 30, coordMarioStart, 46, 60);
     entities.mario.define();
+    console.log(entities);
 };
 
 export const stopMario = function () {
-    // entities.mario.posX = 102;
     context.clearRect(coordMarioStart[0] - 5, coordMarioStart[1] , 56, 60); // Here maybe a mistake
-    // entities.mario.define();
+    entities.mario.posX = 102;
+    entities.mario.define();
 };
 
 export const moveMarioRight = function () {
