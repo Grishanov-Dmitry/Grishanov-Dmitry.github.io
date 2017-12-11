@@ -63,8 +63,11 @@ let count = 0;
 export const drawMap = function () {
     map1.forEach((item) => {
         item.forEach((itemInner) => {
-            let elem = entity.get(itemInner).createElem.bind(x, y);
-            entity.get(itemInner).createElem(x, y);
+            let elem = entity.get(itemInner).createElem.bind(x, y); // Вот в этих двух строчках беда.
+
+            entity.get(itemInner).createElem(x, y); // Вот эта нормально создает объекты и отрисовывает на страницу.
+            // Но, запихнуть эту стоку в переменную или сразу закинуть в массив не выходит - он равнв undef
+            
             if(itemInner === 8) {
                 parts.push(elem);
                 console.log(elem);
