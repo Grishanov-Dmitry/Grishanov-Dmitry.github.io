@@ -8,6 +8,10 @@ import {counter} from './index';
 export const entities = {};
 
 export const drawMario = function () {
+    const newCanvas = document.createElement('canvas');
+    const newContext = newCanvas.getContext('2d');
+    newCanvas.width = window.innerWidth;
+    newCanvas.height = window.innerHeight;
     entities.mario = new constructorOfEntities(spriteMarioUrl, 102, 4, 18, 30, coordMarioStart, 46, 60);
     entities.mario.define();
     console.log(entities);
@@ -22,7 +26,6 @@ export const stopMario = function () {
 export const moveMarioRight = function () {
     context.clearRect(coordMarioStart[0] - 5, coordMarioStart[1], 46, 60);
     entities.mario.define();
-    console.log(entities.mario);
     if(counter % 5 === 0) {
         (entities.mario.posX === 156) ? entities.mario.posX = 120 : entities.mario.posX += 18;
     }

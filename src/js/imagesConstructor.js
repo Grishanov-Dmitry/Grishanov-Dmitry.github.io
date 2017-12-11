@@ -31,7 +31,6 @@ export default class ImagesConstructor {
             this.width,
             this.height);
             this.part.set(name, bufferElem);
-            console.log(bufferElem);
     }
 
     draw(name, context, x, y) {

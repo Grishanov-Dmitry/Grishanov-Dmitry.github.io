@@ -7,9 +7,11 @@ import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
 import {keys} from './keysEvents';
 import {drawMap, moveBrickStar} from './drawMap';
+import {moveRec} from './camera';
 
 export let counter = 0;
-create();
+// create();
+
 
 
 const requestAnimFrame = (function(){
@@ -27,6 +29,7 @@ const requestAnimFrame = (function(){
 const mainLoop = function () {
     counter === 24 ? counter = 1 : counter++;
     moveBrickStar();
+    // moveRec();
     // drawAllElem();
     requestAnimFrame(mainLoop);
 };

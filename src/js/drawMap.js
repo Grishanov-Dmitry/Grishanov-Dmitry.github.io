@@ -28,6 +28,7 @@ const blockEmpty = new constructorOfEntities(sprite3Url, 910, 0, 25, 25, [x, y],
 
 //Here we keep the parts of the map
 const entity = new Map();
+const parts = [];
 
 //Add a new parts in the entity
 entity.set(0, blockEmpty);
@@ -40,7 +41,8 @@ entity.set(6, brickFlower);
 entity.set(7, brickTurtle);
 entity.set(8, brickStar);
 
-
+// console.log(entity);
+// entity.forEach((item) => console.log(item));
 
 // console.log(entity);
 
@@ -56,11 +58,18 @@ export const moveBrickStar = function () {
     }
 };
 
+let count = 0;
 //Draws map
 export const drawMap = function () {
     map1.forEach((item) => {
         item.forEach((itemInner) => {
+            let elem = entity.get(itemInner).createElem.bind(x, y);
             entity.get(itemInner).createElem(x, y);
+            if(itemInner === 8) {
+                parts.push(elem);
+                console.log(elem);
+            }
+
             // console.log(elem);
             x += 51;
         });
@@ -69,6 +78,7 @@ export const drawMap = function () {
     });
 };
 
+// console.log(parts[0]);
 
 
 

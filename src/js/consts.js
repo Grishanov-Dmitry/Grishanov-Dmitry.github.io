@@ -11,7 +11,7 @@ export const wrapper = document.getElementById('wrapper');
 
 //Canvas
 export const canvas = document.getElementById('canvas');
-canvas.width = window.innerWidth;
+canvas.width = window.innerWidth +100;
 canvas.height = window.innerHeight;
 export const context = canvas.getContext('2d');
 export const canvasWidth = canvas.width;
@@ -22,6 +22,9 @@ export const spriteMarioUrl = '../public/images/mario-sprite.png';
 export const sprite1Url = '../public/images/sprite-1.png';
 export const sprite3Url = '../public/images/sprite-3.png';
 export const bgInGame = '../public/images/bg-in-game.png';
+export const spriteMario = new Image().src = spriteMarioUrl;
+export const sprite1 = new Image().src = sprite1Url;
+export const sprite3 = new Image().src = sprite3Url;
 export const allSpritesUrl = [
     '../public/images/mario-sprite.png',
     '../public/images/sprite-3.png',

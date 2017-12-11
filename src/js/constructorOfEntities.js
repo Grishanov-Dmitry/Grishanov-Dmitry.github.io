@@ -3,7 +3,6 @@
  */
 import {canvas, context} from './consts';
 
-
 export default class constructorOfEntities{
     constructor(url, posX, posY, sizeX, sizeY, entitieCoord, width, height, frames) {
         this.url = url;
