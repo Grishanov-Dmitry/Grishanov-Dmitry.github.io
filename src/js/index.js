@@ -11,7 +11,7 @@ import {moveRec} from './camera';
 
 export let counter = 0;
 // create();
-
+// alert();
 
 
 const requestAnimFrame = (function(){

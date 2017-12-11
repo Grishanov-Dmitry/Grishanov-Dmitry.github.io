@@ -8,19 +8,19 @@ import {counter} from './index';
 export const entities = {};
 
 export const drawMario = function () {
-    const newCanvas = document.createElement('canvas');
-    const newContext = newCanvas.getContext('2d');
-    newCanvas.width = window.innerWidth;
-    newCanvas.height = window.innerHeight;
+    // const newCanvas = document.createElement('canvas');
+    // const newContext = newCanvas.getContext('2d');
+    // newCanvas.width = window.innerWidth;
+    // newCanvas.height = window.innerHeight;
     entities.mario = new constructorOfEntities(spriteMarioUrl, 102, 4, 18, 30, coordMarioStart, 46, 60);
     entities.mario.define();
-    console.log(entities);
+    // console.log(entities);
 };
 
 export const stopMario = function () {
     context.clearRect(coordMarioStart[0] - 5, coordMarioStart[1] , 56, 60); // Here maybe a mistake
-    entities.mario.posX = 102;
-    entities.mario.define();
+    // entities.mario.posX = 102;
+    // entities.mario.define();
 };
 
 export const moveMarioRight = function () {

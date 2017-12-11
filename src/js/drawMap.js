@@ -48,14 +48,26 @@ entity.set(8, brickStar);
 
 
 export const moveBrickStar = function () {
-    if(counter % 10 === 0) {
-        if(entity.get(8).posX === 510) {
-            entity.get(8).posX = 434;
-        } else {
-            entity.get(8).define();
-            entity.get(8).posX += 38;
+    parts.forEach((item) => {
+        if(counter % 10 === 0) {
+            if(item.posX === 510) {
+                item.posX = 434;
+            } else {
+                // console.log(item.posY);
+                // item.define();
+                item.posX += 38;
+            }
         }
-    }
+    });
+
+    // if(counter % 10 === 0) {
+    //     if(entity.get(8).posX === 510) {
+    //         entity.get(8).posX = 434;
+    //     } else {
+    //         entity.get(8).define();
+    //         entity.get(8).posX += 38;
+    //     }
+    // }
 };
 
 let count = 0;
@@ -63,17 +75,15 @@ let count = 0;
 export const drawMap = function () {
     map1.forEach((item) => {
         item.forEach((itemInner) => {
-            let elem = entity.get(itemInner).createElem.bind(x, y); // Вот в этих двух строчках беда.
 
-            entity.get(itemInner).createElem(x, y); // Вот эта нормально создает объекты и отрисовывает на страницу.
-            // Но, запихнуть эту стоку в переменную или сразу закинуть в массив не выходит - он равнв undef
+            let entityInstance = entity.get(itemInner);
+            let createElem = entityInstance.createElem.bind(entityInstance, x, y);
+            debugger;
+            createElem();
 
-            if(itemInner === 8) {
-                parts.push(elem);
-                console.log(elem);
+            if(itemInner === 8) { // Выбираю только звезды. В дальнейшем хотел им применить анимацию.
+                parts.push(createElem);
             }
-
-            // console.log(elem);
             x += 51;
         });
         x = 0;
@@ -81,7 +91,8 @@ export const drawMap = function () {
     });
 };
 
-// console.log(parts[0]);
+parts[0](1,3);
+
 
 
 
