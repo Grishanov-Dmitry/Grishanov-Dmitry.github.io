@@ -6,12 +6,14 @@ import {obj1} from './enemies';
 import {marioHero, fallMario, animation} from './moveHero';
 import {obj} from './enemies';
 import {coordMarioStart} from './consts';
+import {enemies} from './enemies';
 
 export const crashOfEntities = function () {
-    if(obj.posOnMap[0] === marioHero.coordMario[0]) {
-        if(!animation) return false;
-        // fallMario();
-    }
-
+    enemies.forEach((item) => {
+        if(item.posOnMap[0] === marioHero.coordMario[0]) { // Координаты Марио выше чем у врагов
+            if(!animation) return false;
+            // fallMario();
+        }
+    });
 };
 

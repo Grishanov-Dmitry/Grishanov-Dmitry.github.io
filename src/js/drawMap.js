@@ -14,8 +14,8 @@ let q = 0;
 let arr = [ ];
 
 //Create a new parts for map
-const brick = new constructorOfEntities(sprite3Url, 798, 5, 32, 30, [x, y], 50, 50);
-const brickQuestionMark = new constructorOfEntities(sprite3Url, 874, 5, 30, 30, [x, y], 50, 50);
+const brick = new constructorOfEntities(sprite3Url, 800, 5, 32, 30, [x, y], 50, 50);
+const brickQuestionMark = new constructorOfEntities(sprite3Url, 876, 5, 29, 29, [x, y], 50, 50);
 const brickCoin = new constructorOfEntities(sprite3Url, 359, 13, 20, 29, [x, y], 50, 50);
 const brickStar = new constructorOfEntities(sprite3Url, 434, 6, 38, 38, [x, y], 50, 50);
 const brickMushroom = new constructorOfEntities(sprite3Url, 9, 53, 45, 45, [x, y], 50, 50);
@@ -29,7 +29,8 @@ const blockEmpty = new constructorOfEntities(sprite3Url, 910, 0, 25, 25, [x, y],
 const entity = new Map();
 const parts = [];
 
-const hindrance = [];
+export const bricksCoord = [];
+export const brickqQuestCoord = [];
 
 //Add a new parts in the entity
 entity.set(0, blockEmpty);
@@ -45,31 +46,35 @@ entity.set(8, brickStar);
 
 const addHindrance = function (item, obj) {
   switch (item) {
-      // case 1:
+      case 1:
+          // debugger;
+          bricksCoord.push([obj.posX + x, obj.posY + y]);
+          break;
 
+          case 3:
+          // debugger;
+              brickqQuestCoord.push([x, y]);
+          break;
   }
 };
+
 
 
 //Draws map
 export const drawMap = function () {
     map1.forEach((item) => {
         item.forEach((itemInner) => {
-
             let entityInstance = entity.get(itemInner);
             addHindrance(itemInner, entityInstance);
-            hindrance.push({
-                posX: entityInstance.posX + x,
-                posY: entityInstance.posY + y
-            });
             let createElem = entityInstance.createElem.bind(entityInstance, x, y, q);
             createElem();
 
-            x += 51;
+            x += 50;
         });
         x = 0;
-        y += 51;
+        y += 50;
     });
+    // console.log(bricksCoord);
 };
 
 

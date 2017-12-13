@@ -5,7 +5,7 @@ import {loadImage, create} from './loaders';
 import {mario, moveMarioRight, drawMario, animation, jumpMario, mariodown} from './moveHero';
 import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
-import {keys, jumpingUp, jumpingDown} from './keysEvents';
+import {keys, jumpingUp, jumpingDown, checkKeys, keysDown} from './keysEvents';
 import {drawMap, moveBrickStar} from './drawMap';
 import {moveRec} from './camera';
 import {enemies,startMoveEnemies} from './enemies';
@@ -31,9 +31,10 @@ const mainLoop = function () {
     counter === 24 ? counter = 1 : counter++;
     startMoveEnemies();
     crashOfEntities();
+    checkKeys();
     if(jumpingUp)  jumpMario();
     if(jumpingDown) mariodown();
-    // console.log(counter);
+    // console.log(keysDown);
     requestAnimFrame(mainLoop);
 };
 
