@@ -28,13 +28,13 @@ export const sprite3 = new Image().src = sprite3Url;
 export const allSpritesUrl = [
     '../public/images/mario-sprite.png',
     '../public/images/sprite-3.png',
-    '../public/images/bg-in-game.png'
+    '../public/images/bg-in-game.png',
 ];
 
 export const loadingWindiw = document.getElementById('loading');
 
 
-export const coordMarioStart = [200,550];
+
 
 
 

@@ -34,13 +34,13 @@ export default class constructorOfEntities{
         )
     }
 
-    createElem(x , y) {
+    createElem(x = 0, y = 0, q = 0) {
         let image = new Image();
         image.src = this.url;
 
         context.drawImage(
             image,
-            this.posX,
+            this.posX + q,
             this.posY,
             this.sizeX,
             this.sizeY,

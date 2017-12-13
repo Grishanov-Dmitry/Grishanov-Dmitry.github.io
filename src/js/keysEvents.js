@@ -2,11 +2,13 @@
  * Created by Dima on 07.12.2017.
  */
 
-import {} from './moveEntity';
+import {} from './moveHero';
 import {entities, coordMarioStart} from './consts';
-import {moveMarioRight, stopMario, moveMarioLeft} from './moveEntity';
+import {moveMarioRight, stopMario, moveMarioLeft, jumpMario} from './moveHero';
 
 let keyDown = null;
+export let jumpingUp = false;
+export let jumpingDown = false;
 
 export const keys = {
     w: 87,
@@ -17,8 +19,23 @@ export const keys = {
     inter: 13
 };
 
+export const jumpingFalse = function () {
+    jumpingUp = false;
+    jumpingDown = true;
+};
+
+export const jumpingDownFalse = function () {
+    jumpingDown = false;
+};
+
+export const jumpingDownTrue = function () {
+    jumpingDown = true;
+};
+
 export const isPressW = function () {
-    console.log('press w');
+    jumpingUp = true;
+    console.log("Нажата W");
+
 };
 
 export const isPressS = function () {
@@ -30,7 +47,9 @@ export const isPressA = function () {
 };
 
 export const isPressD = function () {
+    debugger;
     moveMarioRight();
+    console.log("Нажата D");
 };
 
 export const isPressSpace = function () {

@@ -9,6 +9,7 @@ import {counter} from './index';
 
 let x = 0; //Coordinates when will draw a new image
 let y = 0;
+let q = 0;
 
 let arr = [ ];
 
@@ -17,18 +18,18 @@ const brick = new constructorOfEntities(sprite3Url, 798, 5, 32, 30, [x, y], 50, 
 const brickQuestionMark = new constructorOfEntities(sprite3Url, 874, 5, 30, 30, [x, y], 50, 50);
 const brickCoin = new constructorOfEntities(sprite3Url, 359, 13, 20, 29, [x, y], 50, 50);
 const brickStar = new constructorOfEntities(sprite3Url, 434, 6, 38, 38, [x, y], 50, 50);
-const brickMushroom = new constructorOfEntities(sprite3Url, 7, 53, 45, 45, [x, y], 50, 50);
-const brickMushroom2 = new constructorOfEntities(sprite3Url, 158, 8, 44, 44, [x, y], 50, 50);
+const brickMushroom = new constructorOfEntities(sprite3Url, 9, 53, 45, 45, [x, y], 50, 50);
+const brickMushroom2 = new constructorOfEntities(sprite3Url, 160, 8, 44, 44, [x, y], 50, 50);
 const brickFlower = new constructorOfEntities(sprite3Url, 134, 138, 48, 48, [x, y], 50, 50);
 const brickTurtle = new constructorOfEntities(sprite3Url, 740, 151, 38, 38, [x, y], 50, 50);
 const blockEmpty = new constructorOfEntities(sprite3Url, 910, 0, 25, 25, [x, y], 50, 50);
 
 
-// console.log(brickStar);
-
 //Here we keep the parts of the map
 const entity = new Map();
 const parts = [];
+
+const hindrance = [];
 
 //Add a new parts in the entity
 entity.set(0, blockEmpty);
@@ -41,49 +42,29 @@ entity.set(6, brickFlower);
 entity.set(7, brickTurtle);
 entity.set(8, brickStar);
 
-// console.log(entity);
-// entity.forEach((item) => console.log(item));
 
-// console.log(entity);
+const addHindrance = function (item, obj) {
+  switch (item) {
+      // case 1:
 
-
-export const moveBrickStar = function () {
-    parts.forEach((item) => {
-        if(counter % 10 === 0) {
-            if(item.posX === 510) {
-                item.posX = 434;
-            } else {
-                // console.log(item.posY);
-                // item.define();
-                item.posX += 38;
-            }
-        }
-    });
-
-    // if(counter % 10 === 0) {
-    //     if(entity.get(8).posX === 510) {
-    //         entity.get(8).posX = 434;
-    //     } else {
-    //         entity.get(8).define();
-    //         entity.get(8).posX += 38;
-    //     }
-    // }
+  }
 };
 
-let count = 0;
+
 //Draws map
 export const drawMap = function () {
     map1.forEach((item) => {
         item.forEach((itemInner) => {
 
             let entityInstance = entity.get(itemInner);
-            let createElem = entityInstance.createElem.bind(entityInstance, x, y);
-            debugger;
+            addHindrance(itemInner, entityInstance);
+            hindrance.push({
+                posX: entityInstance.posX + x,
+                posY: entityInstance.posY + y
+            });
+            let createElem = entityInstance.createElem.bind(entityInstance, x, y, q);
             createElem();
 
-            if(itemInner === 8) { // Выбираю только звезды. В дальнейшем хотел им применить анимацию.
-                parts.push(createElem);
-            }
             x += 51;
         });
         x = 0;
@@ -91,9 +72,33 @@ export const drawMap = function () {
     });
 };
 
-parts[0](1,3);
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+// export const moveBrickStar = function () {
+//     parts.forEach((item) => {
+//         if(counter % 10 === 0) {
+//             if(item.posX === 510) {
+//                 item.posX = 434;
+//             } else {
+//                 // console.log(item.posY);
+//                 // item.define();
+//                 item.posX += 38;
+//             }
+//         }
+//     });
+//
+// };
