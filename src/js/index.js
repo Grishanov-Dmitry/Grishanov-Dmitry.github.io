@@ -5,14 +5,13 @@ import {loadImage, create} from './loaders';
 import {mario, moveMarioRight, drawMario, animation, jumpMario, mariodown} from './moveHero';
 import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
-import {keys, jumpingUp, jumpingDown, checkKeys, keysDown} from './keysEvents';
+import {keys, jumpingUp, jumpingDown, checkKeys, keysDown, lastPressButton} from './keysEvents';
 import {drawMap, moveBrickStar} from './drawMap';
 import {moveRec} from './camera';
 import {enemies,startMoveEnemies} from './enemies';
-import {crashOfEntities} from './crashOfEntities';
+import {crashOfEntities} from './changeCrash';
 
 export let counter = 0;
-
 
 const requestAnimFrame = (function(){
     return window.requestAnimationFrame       ||
@@ -29,6 +28,7 @@ const requestAnimFrame = (function(){
 const mainLoop = function () {
     if(!animation) return false;
     counter === 24 ? counter = 1 : counter++;
+    // console.log(lastPressButton);
     startMoveEnemies();
     crashOfEntities();
     checkKeys();

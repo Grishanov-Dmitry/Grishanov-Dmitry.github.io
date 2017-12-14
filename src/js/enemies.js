@@ -5,6 +5,7 @@ import constructorOfEntities from './constructorOfEntities';
 import {sprite3Url, context} from './consts';
 import {counter} from './index';
 import {bricksCoord, brickqQuestCoord} from './drawMap';
+import {changeCrash} from './changeCrash';
 
 export const enemies = [
     {
@@ -31,18 +32,18 @@ export const enemies = [
     }
 ];
 
-export let obj = {
-    posOnMap: [300, 560],
-    posStart: [158,8],
-    posOnsprite: [158, 8, 246],
-    size: [44, 44],
-    get newImage() {
-        let nextEnemy = new constructorOfEntities(sprite3Url, this.posOnsprite[0], this.posOnsprite[1], this.size[0], this.size[1], this.posOnMap, 50, 50);
-        nextEnemy.createElem();
-    }
-};
-
-obj.newImage;
+// export let obj = {
+//     posOnMap: [300, 560],
+//     posStart: [158,8],
+//     posOnsprite: [158, 8, 246],
+//     size: [44, 44],
+//     get newImage() {
+//         let nextEnemy = new constructorOfEntities(sprite3Url, this.posOnsprite[0], this.posOnsprite[1], this.size[0], this.size[1], this.posOnMap, 50, 50);
+//         nextEnemy.createElem();
+//     }
+// };
+//
+// obj.newImage;
 
 const nextAnimation = function (item) {
     if( item.posOnsprite[0] === item.posOnsprite[2] ) {
@@ -52,7 +53,7 @@ const nextAnimation = function (item) {
     }
 };
 
-const changePosToRight = function (item) {
+export const changePosToRight = function (item) {
     context.clearRect(item.posOnMap[0], item.posOnMap[1], 50, 50);
     item.newImage;
     item.posOnMap[0] += 5;
@@ -60,7 +61,7 @@ const changePosToRight = function (item) {
     nextAnimation(item);
 };
 
-const changePosToLeft = function (item) {
+export const changePosToLeft = function (item) {
     context.clearRect(item.posOnMap[0] + 5, item.posOnMap[1], 50, 50);
     item.newImage;
     item.posOnMap[0] -= 5;
@@ -70,25 +71,7 @@ const changePosToLeft = function (item) {
 
 console.log(brickqQuestCoord);
 
-const changeCrash = function (enem) {
-    console.log(enem.posOnMap);
-    brickqQuestCoord.forEach((coord) => {
-        // debugger;
-        if(coord[0] - 50 === enem.posOnMap[0] && coord[1] === enem.posOnMap[1] ||
-                coord[0] + 50 === enem.posOnMap[0] && coord[1] === enem.posOnMap[1]
-        ) {
-            if(enem.moveRight) {
-                enem.moveRight = false;
-                changePosToLeft(enem);
-            } else {
-                enem.moveRight = true;
-                changePosToRight(enem);
-            }
 
-
-        }
-    });
-};
 
 export const startMoveEnemies = () => {
     enemies.forEach( (enem) => {

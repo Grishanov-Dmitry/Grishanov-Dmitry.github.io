@@ -32,6 +32,7 @@ const parts = [];
 export const bricksCoord = [];
 export const brickqQuestCoord = [];
 
+
 //Add a new parts in the entity
 entity.set(0, blockEmpty);
 entity.set(1, brick);

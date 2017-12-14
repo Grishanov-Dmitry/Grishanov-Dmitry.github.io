@@ -11,7 +11,7 @@ export const wrapper = document.getElementById('wrapper');
 
 //Canvas
 export const canvas = document.getElementById('canvas');
-canvas.width = window.innerWidth +100;
+canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 export const context = canvas.getContext('2d');
 export const canvasWidth = canvas.width;

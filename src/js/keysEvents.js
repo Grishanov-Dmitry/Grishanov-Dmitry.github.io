@@ -4,7 +4,9 @@
 
 import {} from './moveHero';
 import {entities, coordMarioStart} from './consts';
-import {moveMarioRight, stopMario, moveMarioLeft, jumpMario} from './moveHero';
+import {moveMarioRight, stopMario, moveMarioLeft, jumpMario, marioHero} from './moveHero';
+
+export let lastPressButton = 0;
 
 export let keysDown = {
     65: false,
@@ -69,6 +71,8 @@ export const isPressInter = function () {
 window.addEventListener('keyup', (event) => {
     keysDown[event.keyCode] = false;
     stopMario();
+    marioHero.canGo = true;
+    // lastPressButton = 0;
 });
 
 
@@ -87,9 +91,11 @@ export const checkKeys = function () {
                     case '83': //Button S
                         break;
                     case '65':
+                        lastPressButton = 65;
                         moveMarioLeft(); //Button A
                         break;
                     case '68':
+                        lastPressButton = 68;
                         moveMarioRight(); //Button D
                         break;
                     case 32:
