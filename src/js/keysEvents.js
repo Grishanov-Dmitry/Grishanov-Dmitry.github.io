@@ -6,7 +6,7 @@ import {} from './moveHero';
 import {entities, coordMarioStart} from './consts';
 import {moveMarioRight, stopMario, moveMarioLeft, jumpMario, marioHero} from './moveHero';
 
-export let lastPressButton = 0;
+export let lastPressButton = [];
 
 export let keysDown = {
     65: false,
@@ -14,8 +14,6 @@ export let keysDown = {
     83: false,
     87: false
 };
-export let jumpingUp = false;
-export let jumpingDown = false;
 
 export const keys = {
     w: 87,
@@ -24,19 +22,6 @@ export const keys = {
     d: 68,
     space: 32,
     inter: 13
-};
-
-export const jumpingFalse = function () {
-    jumpingUp = false;
-    jumpingDown = true;
-};
-
-export const jumpingDownFalse = function () {
-    jumpingDown = false;
-};
-
-export const jumpingDownTrue = function () {
-    jumpingDown = true;
 };
 
 export const isPressW = function () {
@@ -71,7 +56,7 @@ export const isPressInter = function () {
 window.addEventListener('keyup', (event) => {
     keysDown[event.keyCode] = false;
     stopMario();
-    marioHero.canGo = true;
+    // marioHero.canGo = true;
     // lastPressButton = 0;
 });
 
@@ -86,16 +71,18 @@ export const checkKeys = function () {
             if(keysDown[key]) {
                 switch(key) {
                     case '87':
-                        jumpingUp = true; //Button W
+                        if(!marioHero.goDown) marioHero.goUp = true;  //Button W
                         break;
                     case '83': //Button S
                         break;
                     case '65':
-                        lastPressButton = 65;
+                        lastPressButton.unshift(65);
+                        lastPressButton.length = 2;
                         moveMarioLeft(); //Button A
                         break;
                     case '68':
-                        lastPressButton = 68;
+                        lastPressButton.unshift(68);
+                        lastPressButton.length = 2;
                         moveMarioRight(); //Button D
                         break;
                     case 32:

@@ -31,6 +31,7 @@ const parts = [];
 
 export const bricksCoord = [];
 export const brickqQuestCoord = [];
+export const brickAll = [];
 
 
 //Add a new parts in the entity
@@ -48,12 +49,12 @@ entity.set(8, brickStar);
 const addHindrance = function (item, obj) {
   switch (item) {
       case 1:
-          // debugger;
+          brickAll.push([x, y]);
           bricksCoord.push([obj.posX + x, obj.posY + y]);
           break;
 
           case 3:
-          // debugger;
+              brickAll.push([x, y]);
               brickqQuestCoord.push([x, y]);
           break;
   }
@@ -75,7 +76,7 @@ export const drawMap = function () {
         x = 0;
         y += 50;
     });
-    // console.log(bricksCoord);
+    console.log(brickAll);
 };
 
 
