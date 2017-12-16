@@ -41,7 +41,7 @@ export const isPressA = function () {
 export const isPressD = function (event) {
     // debugger;
     moveMarioRight();
-    console.log(keysDown);
+    // console.log(keysDown);
     // console.log("Нажата D");
 };
 

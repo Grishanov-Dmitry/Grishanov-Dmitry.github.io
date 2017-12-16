@@ -28,13 +28,16 @@ let crash = false;
 const checkInJumping = function (item) {
     if(marioHero.coordMario[1] + 50 <= item[1]) {
         // debugger;
-        console.log('Run');
+        // console.log('Run');
         marioHero.canGoRight = true;
         marioHero.canGoLeft = true;
         marioHero.goDown = false;
         marioHero.goUp = false;
-        marioHero.coordMarioInMamory[1] = item[1] - 50;
-        marioHero.coordMarioInMamory[0] = item[1] - 50 - 70;
+        // if(marioHero.coordMario[0] + 75 > item[0]) {
+        //     marioHero.coordMarioInMamory[1] = item[1] - 50;
+        //     marioHero.coordMarioInMamory[0] = item[1] - 50 - 70;
+        // }
+
     }
 };
 
@@ -106,14 +109,22 @@ export const checkTouchGround = function () {
 
          if(Math.abs(item[0] - marioHero.coordMario[0]) <= 50
              && Math.abs(item[1] - marioHero.coordMario[1] - 5) <= 50) {
-             crash = true;
+             marioHero.coordMarioInMamory[1] = item[1];
+             marioHero.coordMarioInMamory[0] = item[1] - 120;
+
+                 crash = true;
+             // marioHero.coordMarioInMamory[1] = item[1];
+             // marioHero.goDown = false;
+             // marioHero.goDownUnderGround = false;
          }
        if(i + 1 === length && !crash && marioHero.goDown != true && marioHero.goUp != true) {
              // debugger;
-           marioHero.goDownUnderGround = true;
+           marioHero.goDown = true;
            console.log('NO CRASH');
        } else {
              marioHero.goDown = false;
+           console.log('CRASH CRASH CRASH');
+
        }
    });
 };

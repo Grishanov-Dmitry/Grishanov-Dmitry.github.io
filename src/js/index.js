@@ -9,7 +9,7 @@ import {keys, checkKeys, keysDown, lastPressButton} from './keysEvents';
 import {drawMap, moveBrickStar} from './drawMap';
 import {moveRec} from './camera';
 import {enemies,startMoveEnemies} from './enemies';
-import {crashOfEntities} from './changeCrash';
+import {crashOfEntities, checkTouchGround} from './changeCrash';
 
 export let counter = 0;
 
@@ -34,7 +34,8 @@ const mainLoop = function () {
     checkKeys();
     if(marioHero.goUp)  jumpMario();
     if(marioHero.goDown) mariodown();
-    if(marioHero.goDownUnderGround) marioDownUntilGround();
+    checkTouchGround();
+    // if(marioHero.goDownUnderGround) marioDownUntilGround();
     // console.log(keysDown);
     requestAnimFrame(mainLoop);
 };

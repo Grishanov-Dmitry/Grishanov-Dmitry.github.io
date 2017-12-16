@@ -17,8 +17,8 @@ export const drawMario = function () {
     marioHero.goDown = false;
     marioHero.canGoRight = true;
     marioHero.canGoLeft = true;
-    marioHero.coordMario = [200,550]; // Mario's coordinates in start game. After - current coordinates.
-    marioHero.coordMarioInMamory = []; // Mario's coordinates in jump. 0 - top coord mario jump. 1 - coord return
+    marioHero.coordMario = [10,550]; // Mario's coordinates in start game. After - current coordinates.
+    marioHero.coordMarioInMamory = []; // Mario's coordinates in jump. 0 - top coord mario jump. 1 - coord when hero most return
     marioHero.coordOnsprite = [102, 4];
     marioHero.mario = new constructorOfEntities(spriteMarioUrl, marioHero.coordOnsprite[0], marioHero.coordOnsprite[1], 18, 30, marioHero.coordMario, 45, 50);
     marioHero.mario.define();
@@ -41,23 +41,23 @@ export const moveMarioRight = function () {
     if(!animation) return false;
     crashMarioWithBrick();
     // debugger;
-    marioHero.canGoRight ?  marioHero.coordMario[0] += 5 : marioHero.coordMario[0] += 0;
+    marioHero.canGoRight ?  marioHero.coordMario[0] += 3 : marioHero.coordMario[0] += 0;
     context.clearRect(marioHero.coordMario[0] - 3, marioHero.coordMario[1], 45, 50);
     marioHero.mario.define();
     if(counter % 3 === 0) {
         (marioHero.mario.posX === 156) ? marioHero.mario.posX = 120 : marioHero.mario.posX += 18;
     }
-    debugger;
-    if(marioHero.coordMario[1] - 50 === marioHero.coordMarioInMamory[1]){
+    // debugger;
+    // if(marioHero.coordMario[1] - 50 === marioHero.coordMarioInMamory[1]){
         // checkTouchGround();
-    }
+    // }
 };
 
 export const moveMarioLeft = function () {
     if(!animation) return false;
     crashMarioWithBrick();
     // debugger;
-    marioHero.canGoLeft ?  marioHero.coordMario[0] -= 5 : marioHero.coordMario[0] += 0;
+    marioHero.canGoLeft ?  marioHero.coordMario[0] -= 3 : marioHero.coordMario[0] += 0;
     context.clearRect(marioHero.coordMario[0] + 2, marioHero.coordMario[1], 45, 50);
     marioHero.mario.define();
     if(counter % 3 === 0) {
@@ -74,7 +74,7 @@ const checkMarioJump = function () {
 
 export const jumpMario = function () {
 
-    checkMarioJump();
+    // checkMarioJump();
     if(!animation) return false;
     if(counter % 3 === 0) {
         context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1], 45, 50);
@@ -90,26 +90,33 @@ export const jumpMario = function () {
 
 export const mariodown = function () {
     if(counter % 3 === 0) {
-
         context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1] - 5, 45, 50);
-            if(marioHero.coordMario[1] != marioHero.coordMarioInMamory[1] && marioHero.goDown) {
-                marioHero.coordMario[1] += 5;
-            } else {
-                debugger;
-                checkTouchGround();
-            }
+
+            // if(marioHero.coordMario[1] != marioHero.coordMarioInMamory[1] && marioHero.goDown) {
+                marioHero.coordMario[1] += 10;
+            // }
+            // else {
+                // debugger;
+                // checkTouchGround();
+
+            // }
             marioHero.mario.define();
 
     }
 };
 
-export const marioDownUntilGround = function () {
-    if(counter % 3 === 0) {
-        context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1] - 5, 45, 50);
-        marioHero.coordMario[1] += 20;
-        marioHero.mario.define();
-    }
-};
+// export const marioDownUntilGround = function () {
+//     if(counter % 3 === 0) {
+//         context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1] - 5, 45, 50);
+//
+//         if(marioHero.coordMario[1] + 50 != marioHero.coordMarioInMamory[1]) {
+//             marioHero.coordMario[1] += 5;
+//         } {
+//             marioHero.goDown = false;
+//         }
+//         marioHero.mario.define();
+//     }
+// };
 
 export const fallMario = function () {
     animation = false;

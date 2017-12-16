@@ -76,7 +76,8 @@ export const drawMap = function () {
         x = 0;
         y += 50;
     });
-    console.log(brickAll);
+    // console.log(brickAll);
+    // console.log(brickAll);
 };
 
 
