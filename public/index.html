@@ -10,7 +10,17 @@
     <script src="bundle.js" defer></script>
 </head>
 <body>
+
+<audio src="./sounds/jump.wav" id="audio_jump"></audio>
+<audio src="./sounds/coin.mp3" id="audio_coin"></audio>
+<audio src="./sounds/crash.mp3" id="audio_crash"></audio>
+<audio src="./sounds/the_win.mp3" id="audio_win"></audio>
+<!--<audio src="./sounds/in_menu.mp3" id="audio_menu" autoplay></audio>-->
+
 <canvas id="canvas" class="canvas"></canvas>
+<div class="starsCounter" id="starsCounter">STARS <span id="counter1">0 </span>/ 30</div>
+<div class="coinCounter" id="coinCounter">COINTS <span id="counter2">0 </span>/ 30</div>
+
 <div class="loading" id="loading">
     <p>Please wait, loading</p>
 </div>
@@ -29,5 +39,60 @@
             </div>
         </nav>
     </div>
+
+<section class="controls-manual">
+    <div class="how_play"><h3>How to play?</h3></div>
+    
+    <div class="keys-discription">
+
+        <div class="first">
+            <figure>
+                <img src="./images/wasd-keys-a.png" alt="press key A">
+                <figcaption>
+                    If you pressed key 'A', Mario will be run to the left until you release the key.
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="./images/wasd-keys-w.png" alt="press key W">
+                <figcaption>
+                    If you pressed key 'W', Mario will jump.
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="./images/wasd-keys-d.png" alt="press key D">
+                <figcaption>
+                    If you pressed key 'D', Mario will be run to the right until you release the key.
+                </figcaption>
+            </figure>
+        </div>
+
+        <div>
+            <figure>
+                <img src="./images/wasd-keys-s.png" alt="press key S">
+                <figcaption>
+                    If you pressed key 'S', Mario will have climbed into the tube if he stays on it.
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="./images/wasd-keys-d-w-a.png" alt="press key A">
+                <figcaption>
+                    If you pressed key 'W + A', Mario will run to the left and jump at the same time.
+                </figcaption>
+            </figure>
+
+            <figure>
+                <img src="./images/wasd-keys-d-w.png" alt="press key A">
+                <figcaption>
+                    If you pressed key 'W + D', Mario will run to the right and jump at the same time.
+                </figcaption>
+            </figure>
+        </div>
+
+    </div>
+
+</section>
 </body>
 </html>

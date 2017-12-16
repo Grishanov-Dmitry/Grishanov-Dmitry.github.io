@@ -1,17 +1,26 @@
 /**
  * Created by Dima on 29.11.2017.
  */
-// let img = new Image().src = bgInGame;
-// export const pattern = context.createPattern(img, 'no-repeat');
 
-//Buttons
+//Buttons and fields
 export const buttonStart = document.getElementById('button-start');
 export const buttonFullScreen = document.getElementById('button-full-screen');
 export const wrapper = document.getElementById('wrapper');
+export const starsCounter = document.getElementById('starsCounter');
+export const coinCounter = document.getElementById('coinCounter');
+export const counter1 = document.getElementById('counter1');
+export const counter2 = document.getElementById('counter2');
+
+//Audio
+export const audioJump = document.getElementById('audio_jump');
+export const audioCoin = document.getElementById('audio_coin');
+export const audioCrash = document.getElementById('audio_crash');
+export const audioWin = document.getElementById('audio_win');
+export const audioMenu = document.getElementById('audio_menu');
 
 //Canvas
 export const canvas = document.getElementById('canvas');
-canvas.width = window.innerWidth;
+canvas.width = window.innerWidth + 1000;
 canvas.height = window.innerHeight;
 export const context = canvas.getContext('2d');
 export const canvasWidth = canvas.width;
@@ -32,10 +41,6 @@ export const allSpritesUrl = [
 ];
 
 export const loadingWindiw = document.getElementById('loading');
-
-
-
-
 
 
 

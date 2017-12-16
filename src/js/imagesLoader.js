@@ -15,21 +15,3 @@ export const imagesLoader = (arr) => {
     }));
     return Promise.all(promises);
 };
-
-
-
-
-
-
-
-
-// export const imagesLoader = function (arr) {
-//     arr.forEach(item => {
-//             let image = new Image();
-//             image.src = item;
-//             image.addEventListener('load',() => {
-//                 // showLoading();
-//             });
-//         });
-// };
-

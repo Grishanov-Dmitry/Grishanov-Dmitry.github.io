@@ -2,16 +2,19 @@
  * Created by Dima on 30.11.2017.
  */
 
-import {wrapper, canvas, context, buttonFullScreen, pattern, bgInGame, canvasWidth, canvasHeight} from './consts';
+import {wrapper, canvas, context, buttonFullScreen, pattern, bgInGame, canvasWidth, canvasHeight, starsCounter, coinCounter} from './consts';
 import {counter} from './index';
 
 
 export const cleanWindow = function () {
     wrapper.classList.add('displayNone');
+    coinCounter.classList.add('displayBlock');
+    starsCounter.classList.add('displayBlock');
 };
 
 export const showCanvas = function () {
     canvas.classList.add('displayBlock');
+
 };
 
 export const launchFullScreen = function () {
