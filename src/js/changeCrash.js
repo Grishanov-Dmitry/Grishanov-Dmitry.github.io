@@ -5,7 +5,7 @@
 import {obj1} from './enemies';
 import {marioHero, fallMario, animation, stopMario, marioDownUntilGround} from './moveHero';
 import {obj} from './enemies';
-import {coordMarioStart, context, counter1, counter2, audioCoin, audioCrash, audioJump, audioMenu, audioWin} from './consts';
+import {coordMarioStart, context, counter1, counter2, audioCoin, audioCrash, audioJump, audioMenu, audioWin, gameOver} from './consts';
 import {enemies, changePosToRight, changePosToLeft} from './enemies';
 import {brickqQuestCoord, brickAll, brickCoinArr, brickStarArr} from './drawMap';
 import {keysDown, lastPressButton} from './keysEvents';
@@ -19,10 +19,11 @@ export const crashOfEntities = function () {
         if(Math.abs(item.posOnMap[0] - 5 - marioHero.coordMario[0] - 5) <= 50
         && Math.abs(item.posOnMap[1] + 5 - marioHero.coordMario[1] + 5) <= 50)
         {
-            if(!animation) return false;
+            if(!animation.animation) return false;
             // audioMenu.pause();
             // audioCrash.play();
             fallMario();
+            gameOver.classList.add('displayBlock');
         }
     });
 
@@ -49,7 +50,14 @@ export const crashMarioWithBrick = function () {
         if(Math.abs(item[0] - marioHero.coordMario[0]) <= 50
             && Math.abs(item[1] - marioHero.coordMario[1] + 1) <= 50) {
             crash = true;
+
+            // debugger;
         }
+
+
+
+
+
 
         if(marioHero.goUp || marioHero.goDown && crash) {
             checkInJumping(item);
@@ -93,24 +101,53 @@ export const changeCrash = function (enem) {
 
 };
 
+export const checkCrashWithLavel = function (item) {
+
+    if(Math.abs(item[0] - marioHero.coordMario[0]) <= 50
+        && Math.abs(item[1] - marioHero.coordMario[1]) <= 50
+        && marioHero.coordMario[1] - item[1] === 50
+    ) {
+
+        marioHero.goUp = false;
+        marioHero.goDown = true;
+        // marioHero.moveOnlyDown = true;
+        // debugger;
+
+    }
+
+    // if(marioHero.coordMario[1] - item[1] === 50) {
+    //
+    // }
+};
+
 export const checkTouchGround = function () {
     let length = brickAll.length;
     let crash = false;
 
    brickAll.forEach((item, i) => {
 
-         if(Math.abs(item[0] - marioHero.coordMario[0]) <= 50
-             && Math.abs(item[1] - marioHero.coordMario[1] - 5) <= 50) {
+         if(Math.abs( - 5 + item[0] - 5 - marioHero.coordMario[0]) <= 50
+             && Math.abs(item[1] - marioHero.coordMario[1] - 1) <= 50) {
              marioHero.coordMarioInMamory[1] = item[1];
              marioHero.coordMarioInMamory[0] = item[1] - 120;
                  crash = true;
+
+
+
          }
+
+       if(marioHero.goUp) {
+           checkCrashWithLavel(item);
+       }
 
        if(i + 1 === length && !crash && marioHero.goDown != true && marioHero.goUp != true) {
            marioHero.goDown = true;
        } else {
              marioHero.goDown = false;
+           // console.log('crash');
+             // marioHero.moveOnlyDown = false;
        }
+
 
    });
 };

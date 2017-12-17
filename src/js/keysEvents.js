@@ -4,7 +4,7 @@
 
 import {} from './moveHero';
 import {entities, coordMarioStart, audioJump} from './consts';
-import {moveMarioRight, stopMario, moveMarioLeft, jumpMario, marioHero} from './moveHero';
+import {moveMarioRight, stopMario, moveMarioLeft, jumpMario, marioHero, goToSecondLevel} from './moveHero';
 
 export let lastPressButton = [];
 
@@ -34,6 +34,7 @@ export const checkKeys = function () {
                         // audioJump.play();
                         break;
                     case '83': //Button S
+                        goToSecondLevel();
                         break;
                     case '65':
                         lastPressButton.unshift(65);

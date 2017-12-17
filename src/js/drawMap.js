@@ -16,8 +16,8 @@ let arr = [ ];
 //Create a new parts for map
 const brick = new constructorOfEntities(sprite3Url, 800, 5, 32, 30, [x, y], 50, 50);
 const brickQuestionMark = new constructorOfEntities(sprite3Url, 876, 5, 29, 29, [x, y], 50, 50);
-const brickCoin = new constructorOfEntities(sprite3Url, 359, 13, 20, 29, [x, y], 50, 50);
-const brickStar = new constructorOfEntities(sprite3Url, 434, 6, 38, 38, [x, y], 50, 50);
+const brickCoin = new constructorOfEntities(sprite3Url, 361, 13, 20, 29, [x, y], 50, 50);
+const brickStar = new constructorOfEntities(sprite3Url, 436, 6, 35, 35, [x, y], 50, 50);
 const brickMushroom = new constructorOfEntities(sprite3Url, 9, 53, 45, 45, [x, y], 50, 50);
 const brickMushroom2 = new constructorOfEntities(sprite3Url, 160, 8, 44, 44, [x, y], 50, 50);
 const brickFlower = new constructorOfEntities(sprite3Url, 134, 138, 48, 48, [x, y], 50, 50);
@@ -27,6 +27,7 @@ const tube_1 = new constructorOfEntities(sprite3Url, 728, 6, 31, 31, [x, y], 50,
 const tube_2 = new constructorOfEntities(sprite3Url, 759, 6, 31, 31, [x, y], 50, 50);
 const tube_3 = new constructorOfEntities(sprite3Url, 728, 37, 31, 31, [x, y], 50, 50);
 const tube_4 = new constructorOfEntities(sprite3Url, 759, 37, 31, 31, [x, y], 50, 50);
+const queen = new constructorOfEntities(sprite3Url, 623, 51, 53, 53, [x, y], 50, 50);
 
 
 
@@ -55,6 +56,7 @@ entity.set(9, tube_1);
 entity.set(10, tube_2);
 entity.set(11, tube_3);
 entity.set(12, tube_4);
+entity.set(13, queen);
 
 
 const addHindrance = function (item, obj) {
@@ -89,9 +91,9 @@ const addHindrance = function (item, obj) {
 
 
 //Draws map
-export const drawMap = function () {
+export const drawMap = function (map) {
 
-    map1.forEach((item) => {
+    map.forEach((item) => {
         item.forEach((itemInner) => {
 
             let entityInstance = entity.get(itemInner);

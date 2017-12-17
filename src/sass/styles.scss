@@ -16,7 +16,7 @@ html {
 body {
   background: url("../../public/images/bg-in-game.png");
   background-size: 100% 100%;
-  //overflow: hidden;
+  overflow-x: hidden;
 }
 
 a {
@@ -35,11 +35,9 @@ a {
   background-size: 100% 100%;
   width: 100%;
   height: 100vh;
-  //display: none;
 
   nav {
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;
     padding-top: 5rem;
 
@@ -61,6 +59,12 @@ a {
       }
     }
 
+    a {
+      color: #ffffff;
+    }
+
+
+
     .game-name {
       color: white;
       font-size: 10rem;
@@ -71,6 +75,32 @@ a {
     }
 
   }
+}
+
+.button-up {
+  display: none;
+  width: 20rem;
+  margin-bottom: 2rem;
+  margin-left: 18rem;
+  height: 6rem;
+  color: white;
+  border: 2px solid silver;
+  border-radius: 2rem;
+  font-size: 2rem;
+  background: rgba(0, 180, 254, 0.6);
+}
+
+.button-pageUp-position-fixed {
+  display: block;
+  position: fixed;
+  left: -10rem;
+  top: 10rem;
+}
+
+.button-start-position-fixed {
+  position: fixed;
+  right: 5rem;
+  top: 10rem;
 }
 
 .loading {
@@ -95,16 +125,55 @@ a {
   left: 30%;
   display: none;
   font-size: 3rem;
+  color: #ffffff;
 }
 
 .coinCounter {
   left: 60%;
 }
 
+.game_over {
+  display: none;
+  width: 30rem;
+  height: 20rem;
+  border-radius: 5%;
+  position: absolute;
+  left: 35%;
+  top: 15rem;
+  border: 0.2rem solid white;
+  color: #ffffff;
+  text-align: center;
+  background: #0145F3;
+  opacity: 0.8;
+  z-index: 20;
+  padding: 2rem;
+
+  h3 {
+    font-size: 4rem;
+  }
+
+  p {
+    font-size: 3rem;
+  }
+
+  button {
+    width: 10rem;
+    height: 5rem;
+    border: 0.2rem solid white;
+    border-radius: 0.5rem;
+    margin-top: 3rem;
+    &:hover {
+      background: greenyellow;
+    }
+  }
+
+}
+
+
 .controls-manual {
   width: 100%;
   height: 100vh;
-  background: url("../../public/images/bg-in-menu-2.jpg");
+  background: url("../../public/images/bg-in-menu-5.jpg");
   background-size: 100% 100%;
   color: #ffffff;
   display: flex;
@@ -119,6 +188,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+
   }
 
 }
@@ -150,9 +220,51 @@ a {
 
 }
 
+.screenshots {
+  width: 100%;
+  height: 100vh;
+  background: url("../../public/images/bg-in-menu-3.jpg");
+  background-size: 100% 100%;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
 
+  div {
+    display: flex;
+    justify-content: space-around;
+  }
 
+  img {
+    width: 40rem;
+    height: 20rem;
+  }
+
+  figcaption{
+    font-size: 2rem;
+    text-align: center;
+  }
+
+}
+
+.other-info {
+  width: 100%;
+  height: 100vh;
+  background: url("../../public/images/bg-in-menu-4.jpg");
+  background-size: 100% 100%;
+  color: #ffffff;
+  display: flex;
+}
+
+.bg {
+  width: 100%;
+  height: 100vh;
+  background: url("../../public/images/bg-in-menu-2.jpg");
+  background-size: 100% 100%;
+  display: none;
+
+}
 
 
 

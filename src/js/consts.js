@@ -4,12 +4,21 @@
 
 //Buttons and fields
 export const buttonStart = document.getElementById('button-start');
+// export const buttonStart = document.getElementById('button-start');
+export const buttonStartAgain = document.getElementById('button__start_again');
 export const buttonFullScreen = document.getElementById('button-full-screen');
 export const wrapper = document.getElementById('wrapper');
+export const controlsManual = document.getElementById('controls-manual');
+export const gameOver = document.getElementById('game_over');
+export const screenshots = document.getElementById('screenshots');
+export const otherInfo = document.getElementById('other-info');
+export const bg = document.getElementById('bg');
+export const pageUp = document.getElementById('page-up');
 export const starsCounter = document.getElementById('starsCounter');
 export const coinCounter = document.getElementById('coinCounter');
 export const counter1 = document.getElementById('counter1');
 export const counter2 = document.getElementById('counter2');
+
 
 //Audio
 export const audioJump = document.getElementById('audio_jump');
@@ -21,7 +30,7 @@ export const audioMenu = document.getElementById('audio_menu');
 //Canvas
 export const canvas = document.getElementById('canvas');
 canvas.width = window.innerWidth + 1000;
-canvas.height = window.innerHeight;
+canvas.height = window.innerHeight + 400;
 export const context = canvas.getContext('2d');
 export const canvasWidth = canvas.width;
 export const canvasHeight = canvas.height;
@@ -41,7 +50,6 @@ export const allSpritesUrl = [
 ];
 
 export const loadingWindiw = document.getElementById('loading');
-
 
 
 

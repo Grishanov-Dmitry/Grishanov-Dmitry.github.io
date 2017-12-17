@@ -7,17 +7,21 @@ import {counter} from './index';
 import {lastPressButton} from './keysEvents';
 import {crashMarioWithBrick, checkTouchGround} from './changeCrash';
 import {moveRecRight, moveRecLeft, camera} from './camera';
+import {brickAll} from './drawMap';
 
-export let animation = true;
+export let animation = {
+    animation: true
+};
 
 export const marioHero = {};
 
 export const drawMario = function () {
+    marioHero.moveOnlyDown = false;
     marioHero.goUp = false;
     marioHero.goDown = false;
     marioHero.canGoRight = true;
     marioHero.canGoLeft = true;
-    marioHero.coordMario = [10,550]; // Mario's coordinates in start game. After - current coordinates.
+    marioHero.coordMario = [400,550]; // Mario's coordinates in start game. After - current coordinates.
     marioHero.coordMarioInMamory = []; // Mario's coordinates in jump. 0 - top coord mario jump. 1 - coord when hero most return
     marioHero.coordOnsprite = [102, 4];
     marioHero.mario = new constructorOfEntities(spriteMarioUrl, marioHero.coordOnsprite[0], marioHero.coordOnsprite[1], 18, 30, marioHero.coordMario, 45, 50);
@@ -40,7 +44,8 @@ export const moveMarioRight = function () {
         moveRecRight();
     }
 
-    crashMarioWithBrick();
+        crashMarioWithBrick();
+
 
     marioHero.canGoRight ?  marioHero.coordMario[0] += 3 : marioHero.coordMario[0] += 0;
     context.clearRect(marioHero.coordMario[0] - 3, marioHero.coordMario[1], 45, 50);
@@ -58,7 +63,7 @@ export const moveMarioLeft = function () {
         moveRecLeft();
     }
 
-    crashMarioWithBrick();
+        crashMarioWithBrick();
 
     marioHero.canGoLeft ?  marioHero.coordMario[0] -= 3 : marioHero.coordMario[0] += 0;
     context.clearRect(marioHero.coordMario[0] + 2, marioHero.coordMario[1], 45, 50);
@@ -95,10 +100,31 @@ export const mariodown = function () {
 };
 
 export const fallMario = function () {
-    animation = false;
+    animation.animation = false;
 
     marioHero.coordOnsprite = [6, 113];
     marioHero.mario = new constructorOfEntities(spriteMarioUrl, marioHero.coordOnsprite[0], marioHero.coordOnsprite[1], 24, 32, marioHero.coordMario, 50, 50);
     context.clearRect(marioHero.coordMario[0] - 5, marioHero.coordMario[1], 45, 50);
     marioHero.mario.define();
 };
+
+export const goToSecondLevel = function () {
+    console.log(marioHero.coordMario);
+    if(marioHero.coordMario[0] > 1500 && marioHero.coordMario[0] < 1550 && marioHero.coordMario[1] === 450) {
+        marioHero.coordMario[1] = 680;
+        marioHero.mario.define();
+    }
+
+    if(marioHero.coordMario[0] > 1600 && marioHero.coordMario[0] < 1700 && marioHero.coordMario[1] === 800) {
+        marioHero.coordMario[1] = 450;
+        marioHero.coordMario[0] = 1500;
+        marioHero.mario.define();
+    }
+};
+
+export const ruinWall = function () {
+    brickAll.splice(brickAll.indexOf([1900, 550]), 1);
+    brickAll.splice(brickAll.indexOf([1900, 500]), 1);
+};
+
+ruinWall();

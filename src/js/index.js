@@ -1,18 +1,19 @@
 import './../sass/styles.scss';
-import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl, canvas} from './consts';
-import {cleanWindow, showCanvas, launchFullScreen, createBg, update} from './logic';
+import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl, canvas, coord, pageCoord, pageUp, buttonStartAgain, gameOver, body} from './consts';
+import {cleanWindow, showCanvas, launchFullScreen, createBg, update, clearCanvas} from './logic';
 import {loadImage, create} from './loaders';
 import {mario, moveMarioRight, drawMario, animation, jumpMario, mariodown, marioHero, marioDownUntilGround} from './moveHero';
 import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
 import {keys, checkKeys, keysDown, lastPressButton} from './keysEvents';
 import {drawMap, moveBrickStar} from './drawMap';
-import {moveRec} from './camera';
+import {moveRec, camera} from './camera';
 import {enemies,startMoveEnemies} from './enemies';
 import {crashOfEntities, checkTouchGround, crashWithCoin, crashWithStar} from './changeCrash';
+import {map1, map2} from './mapLevels';
 
 export let counter = 0;
-
+// alert();
 let canvasPosLeft = canvas.style.left;
 const requestAnimFrame = (function(){
 
@@ -30,37 +31,64 @@ const requestAnimFrame = (function(){
 //It's a permanent loop
 const mainLoop = function () {
 
-    if(!animation) return false;
+    if(!animation.animation) return false;
     counter === 24 ? counter = 1 : counter++;
     startMoveEnemies();
     checkKeys();
-    // crashOfEntities();
+    crashOfEntities();
     crashWithCoin();
     crashWithStar();
     if(marioHero.goUp)  jumpMario();
     if(marioHero.goDown) mariodown();
     checkTouchGround();
-    // console.log(canvasPosLeft);
+    // console.log(window.pageYOffset);
     requestAnimFrame(mainLoop);
+
 
 };
 
 // Game starts after press buttonStart
 const startGame = function () {
-
     cleanWindow();
+    animation.animation = true;
     imagesLoader(allSpritesUrl)
         .then(() => showCanvas())
-        .then(() => drawMap())
+        .then(() => drawMap(map1))
         .then(() => drawMario())
-        .then(() => mainLoop());
+        .then(() => mainLoop())
+};
+
+const checkPageCoord = function () {
+    if(window.pageYOffset > 700) {
+        buttonStart.classList.add('button-start-position-fixed');
+        pageUp.classList.add('button-pageUp-position-fixed');
+    } else if (window.pageYOffset < 400) {
+        buttonStart.classList.remove('button-start-position-fixed');
+        pageUp.classList.remove('button-pageUp-position-fixed');
+    }
 
 };
 
+export const startGameAgein = function () {
+    gameOver.classList.remove('displayBlock');
+    camera.x = 0;
+    canvas.style.left = 0;
+
+    startGame();
+
+
+    // document.getElementById('canvas').remove();
+    // const canvas = document.createElement('canvas');
+    // canvas.width = window.innerWidth + 1000;
+    // canvas.height = window.innerHeight;
+    // body.insertBefore(canvas, body.firstChild);
+    // startGame();
+};
 
 buttonStart.addEventListener('click', startGame);
 buttonFullScreen.addEventListener('click', launchFullScreen);
+buttonStartAgain.addEventListener('click', startGameAgein);
 
 
-
+window.addEventListener('scroll', checkPageCoord);
 
