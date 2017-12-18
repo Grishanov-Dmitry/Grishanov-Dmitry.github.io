@@ -414,9 +414,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by Dima on 06.12.2017.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 
 
 var _consts = __webpack_require__(0);
@@ -624,9 +623,8 @@ var _moveHero = __webpack_require__(2);
 
 var _consts = __webpack_require__(0);
 
-var lastPressButton = exports.lastPressButton = []; /**
-                                                     * Created by Dima on 07.12.2017.
-                                                     */
+
+var lastPressButton = exports.lastPressButton = [];
 
 var keysDown = exports.keysDown = {
     65: false,
@@ -883,9 +881,7 @@ var _moveHero = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by Dima on 11.12.2017.
- */
+
 var enemies = exports.enemies = [{
     posOnMap: [680, 550],
     posStart: [7, 53],
@@ -989,9 +985,9 @@ var camera = exports.camera = {
         this.x += x;
         // this.y += y;
     }
-}; /**
-    * Created by Dima on 10.12.2017.
-    */
+
+};
+
 var moveRecRight = exports.moveRecRight = function moveRecRight() {
     camera.move(-3);
     canvas.style.left = camera.x + 'px';
@@ -1701,9 +1697,7 @@ var _imagesConstructor2 = _interopRequireDefault(_imagesConstructor);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by Dima on 02.12.2017.
- */
+
 
 var create = exports.create = function create() {
     var image = new Image();
@@ -1822,9 +1816,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by Dima on 04.12.2017.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _consts = __webpack_require__(0);
 
@@ -1891,9 +1884,8 @@ var imagesLoader = exports.imagesLoader = function imagesLoader(arr) {
         });
     });
     return Promise.all(promises);
-}; /**
-    * Created by Dima on 06.12.2017.
-    */
 
-/***/ })
-/******/ ]);
+};
+
+ })
+]);
