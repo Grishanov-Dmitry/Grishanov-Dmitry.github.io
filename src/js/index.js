@@ -9,7 +9,7 @@ import {keys, checkKeys, keysDown, lastPressButton} from './keysEvents';
 import {drawMap, moveBrickStar} from './drawMap';
 import {moveRec, camera} from './camera';
 import {enemies,startMoveEnemies} from './enemies';
-import {crashOfEntities, checkTouchGround, crashWithCoin, crashWithStar} from './changeCrash';
+import {crashOfEntities, checkTouchGround, crashWithCoin, crashWithStar, checkTouchQueen} from './changeCrash';
 import {map1, map2} from './mapLevels';
 
 export let counter = 0;
@@ -41,8 +41,8 @@ const mainLoop = function () {
     open();
     if(marioHero.goUp)  jumpMario();
     if(marioHero.goDown) mariodown();
+    if(marioHero.checkQueen) checkTouchQueen();
     checkTouchGround();
-    // console.log(window.pageYOffset);
     requestAnimFrame(mainLoop);
 
 
@@ -76,14 +76,6 @@ export const startGameAgein = function () {
     canvas.style.left = 0;
 
     startGame();
-
-
-    // document.getElementById('canvas').remove();
-    // const canvas = document.createElement('canvas');
-    // canvas.width = window.innerWidth + 1000;
-    // canvas.height = window.innerHeight;
-    // body.insertBefore(canvas, body.firstChild);
-    // startGame();
 };
 
 buttonStart.addEventListener('click', startGame);

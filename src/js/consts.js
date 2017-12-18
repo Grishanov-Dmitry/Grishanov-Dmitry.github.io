@@ -3,6 +3,7 @@
  */
 
 //Buttons and fields
+export const gameWin = document.getElementById('game_win');
 export const buttonStart = document.getElementById('button-start');
 export const footer = document.getElementById('footer');
 export const buttonStartAgain = document.getElementById('button__start_again');

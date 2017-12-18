@@ -78,6 +78,7 @@ Object.defineProperty(exports, "__esModule", {
  */
 
 //Buttons and fields
+var gameWin = exports.gameWin = document.getElementById('game_win');
 var buttonStart = exports.buttonStart = document.getElementById('button-start');
 var footer = exports.footer = document.getElementById('footer');
 var buttonStartAgain = exports.buttonStartAgain = document.getElementById('button__start_again');
@@ -133,7 +134,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.startGameAgein = exports.counter = undefined;
 
-__webpack_require__(11);
+__webpack_require__(12);
 
 var _consts = __webpack_require__(0);
 
@@ -153,13 +154,13 @@ var _keysEvents = __webpack_require__(5);
 
 var _drawMap = __webpack_require__(4);
 
-var _camera = __webpack_require__(10);
+var _camera = __webpack_require__(11);
 
-var _enemies = __webpack_require__(8);
+var _enemies = __webpack_require__(9);
 
 var _changeCrash = __webpack_require__(6);
 
-var _mapLevels = __webpack_require__(9);
+var _mapLevels = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -186,8 +187,8 @@ var mainLoop = function mainLoop() {
     (0, _moveHero.open)();
     if (_moveHero.marioHero.goUp) (0, _moveHero.jumpMario)();
     if (_moveHero.marioHero.goDown) (0, _moveHero.mariodown)();
+    if (_moveHero.marioHero.checkQueen) (0, _changeCrash.checkTouchQueen)();
     (0, _changeCrash.checkTouchGround)();
-    // console.log(window.pageYOffset);
     requestAnimFrame(mainLoop);
 };
 
@@ -222,13 +223,6 @@ var startGameAgein = exports.startGameAgein = function startGameAgein() {
     _consts.canvas.style.left = 0;
 
     startGame();
-
-    // document.getElementById('canvas').remove();
-    // const canvas = document.createElement('canvas');
-    // canvas.width = window.innerWidth + 1000;
-    // canvas.height = window.innerHeight;
-    // body.insertBefore(canvas, body.firstChild);
-    // startGame();
 };
 
 _consts.buttonStart.addEventListener('click', startGame);
@@ -261,7 +255,7 @@ var _keysEvents = __webpack_require__(5);
 
 var _changeCrash = __webpack_require__(6);
 
-var _camera = __webpack_require__(10);
+var _camera = __webpack_require__(11);
 
 var _drawMap = __webpack_require__(4);
 
@@ -275,6 +269,7 @@ var animation = exports.animation = {
 var marioHero = exports.marioHero = {};
 
 var drawMario = exports.drawMario = function drawMario() {
+    marioHero.checkQueen = false;
     marioHero.moveOnlyDown = false;
     marioHero.canOpenDoor = false;
     marioHero.goUp = false;
@@ -293,11 +288,6 @@ var stopMario = exports.stopMario = function stopMario() {
     _consts.context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1], 45, 50); // Here maybe a mistake
     marioHero.mario.posX = 102;
     marioHero.mario.define();
-    // debugger;
-    // brickAll.splice(brickAll.indexOf(1900, 550), 1);
-    // brickAll.splice(brickAll.indexOf(1900, 500), 1);
-    // brickAll.splice(brickAll.indexOf([1900, 500]), 1);
-    // brickAll.splice(brickAll.indexOf([1900, 500]), 1);
     console.log(_drawMap.brickAll);
 };
 
@@ -370,13 +360,15 @@ var fallMario = exports.fallMario = function fallMario() {
 };
 
 var goToSecondLevel = exports.goToSecondLevel = function goToSecondLevel() {
-    // console.log(marioHero.coordMario);
+
     if (marioHero.coordMario[0] > 1500 && marioHero.coordMario[0] < 1550 && marioHero.coordMario[1] === 450) {
+        _consts.context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1], 50, 50);
         marioHero.coordMario[1] = 680;
         marioHero.mario.define();
     }
 
-    if (marioHero.coordMario[0] > 1600 && marioHero.coordMario[0] < 1700 && marioHero.coordMario[1] === 800) {
+    if (marioHero.coordMario[0] > 1500 && marioHero.coordMario[0] < 1600 && marioHero.coordMario[1] === 800) {
+        _consts.context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1], 50, 50);
         marioHero.coordMario[1] = 450;
         marioHero.coordMario[0] = 1500;
         marioHero.mario.define();
@@ -384,21 +376,22 @@ var goToSecondLevel = exports.goToSecondLevel = function goToSecondLevel() {
 };
 
 var openDoor = exports.openDoor = function openDoor() {
-    if (_changeCrash.counter2Value === 50 && _changeCrash.counter1Value === 2) {
-        var image = new Image();
-        image.src = _consts.sprite3Url;
-        _consts.context.clearRect(950, 550, 50, 50);
-        _consts.context.drawImage(image, 722, 225, 49, 52, 1900, 550, 50, 50);
+    if (_changeCrash.counter2Value === 2) {
+        marioHero.canOpenDoor = true;
     }
-    marioHero.canOpenDoor = true;
 };
 
 var open = exports.open = function open() {
 
     if (marioHero.canOpenDoor) {
         if (marioHero.coordMario[0] > 1950 && marioHero.coordMario[1] === 550) {
+            var image = new Image();
+            image.src = _consts.sprite3Url;
+            _consts.context.clearRect(1950, 550, 150, 50);
+            _consts.context.drawImage(image, 722, 225, 49, 52, 1900, 550, 50, 50);
             marioHero.coordMario[0] = 1850;
             marioHero.mario.define();
+            marioHero.checkQueen = true;
         }
     }
 };
@@ -414,8 +407,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by Dima on 06.12.2017.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
 
 var _consts = __webpack_require__(0);
@@ -484,7 +478,7 @@ var _constructorOfEntities = __webpack_require__(3);
 
 var _constructorOfEntities2 = _interopRequireDefault(_constructorOfEntities);
 
-var _mapLevels = __webpack_require__(9);
+var _mapLevels = __webpack_require__(10);
 
 var _index = __webpack_require__(1);
 
@@ -623,8 +617,9 @@ var _moveHero = __webpack_require__(2);
 
 var _consts = __webpack_require__(0);
 
-
-var lastPressButton = exports.lastPressButton = [];
+var lastPressButton = exports.lastPressButton = []; /**
+                                                     * Created by Dima on 07.12.2017.
+                                                     */
 
 var keysDown = exports.keysDown = {
     65: false,
@@ -649,7 +644,7 @@ var checkKeys = exports.checkKeys = function checkKeys() {
             switch (key) {
                 case '87':
                     if (!_moveHero.marioHero.goDown) _moveHero.marioHero.goUp = true; //Button W
-                    // audioJump.play();
+                    _consts.audioJump.play();
                     break;
                 case '83':
                     //Button S
@@ -686,9 +681,9 @@ var checkKeys = exports.checkKeys = function checkKeys() {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.crashWithStar = exports.crashWithCoin = exports.checkTouchGround = exports.checkCrashWithLavel = exports.changeCrash = exports.crashMarioWithBrick = exports.crashOfEntities = exports.counter2Value = exports.counter1Value = undefined;
+exports.checkTouchQueen = exports.crashWithStar = exports.crashWithCoin = exports.checkTouchGround = exports.checkCrashWithLavel = exports.changeCrash = exports.crashMarioWithBrick = exports.crashOfEntities = exports.counter2Value = exports.counter1Value = undefined;
 
-var _enemies = __webpack_require__(8);
+var _enemies = __webpack_require__(9);
 
 var _moveHero = __webpack_require__(2);
 
@@ -706,11 +701,19 @@ var counter2Value = exports.counter2Value = 0;
 
 var crashOfEntities = exports.crashOfEntities = function crashOfEntities() {
 
+    if (_moveHero.marioHero.coordMario[1] > 1000) {
+        if (!_moveHero.animation.animation) return false;
+        _consts.audioMenu.pause();
+        _consts.audioCrash.play();
+        (0, _moveHero.fallMario)();
+        _consts.gameOver.classList.add('displayBlock');
+    }
+
     _enemies.enemies.forEach(function (item) {
         if (Math.abs(item.posOnMap[0] - 5 - _moveHero.marioHero.coordMario[0] - 5) <= 50 && Math.abs(item.posOnMap[1] + 5 - _moveHero.marioHero.coordMario[1] + 5) <= 50) {
             if (!_moveHero.animation.animation) return false;
-            // audioMenu.pause();
-            // audioCrash.play();
+            _consts.audioMenu.pause();
+            _consts.audioCrash.play();
             (0, _moveHero.fallMario)();
             _consts.gameOver.classList.add('displayBlock');
         }
@@ -735,8 +738,6 @@ var crashMarioWithBrick = exports.crashMarioWithBrick = function crashMarioWithB
 
         if (Math.abs(item[0] - _moveHero.marioHero.coordMario[0]) <= 50 && Math.abs(item[1] - _moveHero.marioHero.coordMario[1] + 1) <= 50) {
             crash = true;
-
-            // debugger;
         }
 
         if (_moveHero.marioHero.goUp || _moveHero.marioHero.goDown && crash) {
@@ -784,13 +785,7 @@ var checkCrashWithLavel = exports.checkCrashWithLavel = function checkCrashWithL
 
         _moveHero.marioHero.goUp = false;
         _moveHero.marioHero.goDown = true;
-        // marioHero.moveOnlyDown = true;
-        // debugger;
     }
-
-    // if(marioHero.coordMario[1] - item[1] === 50) {
-    //
-    // }
 };
 
 var checkTouchGround = exports.checkTouchGround = function checkTouchGround() {
@@ -813,8 +808,6 @@ var checkTouchGround = exports.checkTouchGround = function checkTouchGround() {
             _moveHero.marioHero.goDown = true;
         } else {
             _moveHero.marioHero.goDown = false;
-            // console.log('crash');
-            // marioHero.moveOnlyDown = false;
         }
     });
 };
@@ -823,7 +816,7 @@ var crashWithCoin = exports.crashWithCoin = function crashWithCoin() {
     _drawMap.brickCoinArr.forEach(function (item) {
 
         if (Math.abs(item[0] - _moveHero.marioHero.coordMario[0]) <= 50 && Math.abs(item[1] - _moveHero.marioHero.coordMario[1] - 5) <= 50) {
-            // audioCoin.play();
+            _consts.audioCoin.play();
             _consts.context.clearRect(item[0], item[1], 50, 50);
             _drawMap.brickCoinArr.splice(_drawMap.brickCoinArr.indexOf(item), 1);
             exports.counter2Value = counter2Value += 1;
@@ -838,7 +831,7 @@ var crashWithStar = exports.crashWithStar = function crashWithStar() {
     _drawMap.brickStarArr.forEach(function (item) {
 
         if (Math.abs(item[0] - _moveHero.marioHero.coordMario[0]) <= 50 && Math.abs(item[1] - _moveHero.marioHero.coordMario[1] - 5) <= 50) {
-            // audioCoin.play();
+            _consts.audioCoin.play();
             _consts.context.clearRect(item[0], item[1], 50, 50);
             _drawMap.brickStarArr.splice(_drawMap.brickStarArr.indexOf(item), 1);
             exports.counter1Value = counter1Value += 1;
@@ -847,14 +840,29 @@ var crashWithStar = exports.crashWithStar = function crashWithStar() {
     });
 };
 
+var checkTouchQueen = exports.checkTouchQueen = function checkTouchQueen() {
+    if (_moveHero.marioHero.coordMario[0] > 1800 && _moveHero.marioHero.coordMario[0] < 1900) {
+        _moveHero.animation.animation = false;
+        _consts.gameWin.classList.add('displayBlock');
+        _consts.audioMenu.pause();
+        _consts.audioWin.play();
+    }
+};
+
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "images/bg-in-game.png";
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "images/bg-in-menu-2.jpg";
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -881,7 +889,9 @@ var _moveHero = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-
+/**
+ * Created by Dima on 11.12.2017.
+ */
 var enemies = exports.enemies = [{
     posOnMap: [680, 550],
     posStart: [7, 53],
@@ -948,7 +958,7 @@ var startMoveEnemies = exports.startMoveEnemies = function startMoveEnemies() {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -961,10 +971,10 @@ Object.defineProperty(exports, "__esModule", {
  * Created by Dima on 09.12.2017.
  */
 
-var map1 = exports.map1 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 11, 12, 0, 0, 0, 13, 0, 0, 14, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 9, 10, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0], [0, 8, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 1, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 12, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 8], [0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]];
+var map1 = exports.map1 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 1, 2, 2, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 11, 12, 0, 0, 0, 13, 0, 0, 14, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 9, 10, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0], [0, 8, 0, 2, 2, 2, 0, 0, 2, 2, 2, 0, 0, 0, 2, 2, 2, 1, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 11, 12, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 8], [0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]];
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -973,9 +983,9 @@ var map1 = exports.map1 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.moveRecLeft = exports.moveRecRight = exports.camera = undefined;
-
-var _consts = __webpack_require__(0);
+/**
+ * Created by Dima on 10.12.2017.
+ */
 
 var camera = exports.camera = {
     x: 0,
@@ -985,27 +995,28 @@ var camera = exports.camera = {
         this.x += x;
         // this.y += y;
     }
-
 };
 
+//Move camera to the right
 var moveRecRight = exports.moveRecRight = function moveRecRight() {
     camera.move(-3);
     canvas.style.left = camera.x + 'px';
 };
 
+//Move camera to the left
 var moveRecLeft = exports.moveRecLeft = function moveRecLeft() {
     camera.move(3);
     canvas.style.left = camera.x + 'px';
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(12);
+var content = __webpack_require__(13);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1030,21 +1041,21 @@ if(false) {
 }
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(13)(undefined);
+exports = module.exports = __webpack_require__(14)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "* {\n  vertical-align: baseline;\n  font-weight: inherit;\n  font-style: inherit;\n  border: 0 none;\n  outline: 0;\n  padding: 0;\n  margin: 0; }\n\nhtml {\n  font-size: 10px; }\n\nbody {\n  background: url(" + __webpack_require__(14) + ");\n  background-size: 100% 100%;\n  overflow-x: hidden; }\n\na {\n  text-decoration: none; }\n\n.display-flex-center, .wrapper nav .button-start-description div, .wrapper nav .button-start-description button, .wrapper nav .game-name {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.wrapper {\n  background: url(" + __webpack_require__(15) + ");\n  opacity: 0.9;\n  background-size: 100% 100%;\n  width: 100%;\n  height: 100vh; }\n  .wrapper nav {\n    display: flex;\n    justify-content: flex-start;\n    padding-top: 5rem; }\n    .wrapper nav .button-start-description div, .wrapper nav .button-start-description button {\n      width: 20rem;\n      margin-bottom: 2rem;\n      margin-left: 18rem;\n      height: 6rem;\n      color: white;\n      border: 2px solid silver;\n      border-radius: 2rem;\n      font-size: 2rem;\n      background: rgba(0, 180, 254, 0.6); }\n      .wrapper nav .button-start-description div:hover, .wrapper nav .button-start-description button:hover {\n        background: rgba(0, 180, 254, 0.9);\n        cursor: pointer; }\n    .wrapper nav a {\n      color: #ffffff; }\n    .wrapper nav .game-name {\n      color: white;\n      font-size: 10rem;\n      flex-direction: column;\n      margin-left: 5rem;\n      font-family: \"Brush Script MT\"; }\n\n.button-up {\n  display: none;\n  width: 20rem;\n  margin-bottom: 2rem;\n  margin-left: 18rem;\n  height: 6rem;\n  color: white;\n  border: 2px solid silver;\n  border-radius: 2rem;\n  font-size: 2rem;\n  background: rgba(0, 180, 254, 0.6); }\n\n.button-pageUp-position-fixed {\n  display: block;\n  position: fixed;\n  left: -10rem;\n  top: 10rem; }\n\n.button-start-position-fixed {\n  position: fixed;\n  right: 5rem;\n  top: 10rem; }\n\n.loading {\n  display: none;\n  width: 200px;\n  height: 200px;\n  color: red;\n  font-size: 2rem; }\n\n.canvas {\n  display: none;\n  position: absolute;\n  z-index: 1; }\n\n.starsCounter, .coinCounter {\n  width: 20rem;\n  height: 5rem;\n  position: absolute;\n  z-index: 10;\n  left: 30%;\n  display: none;\n  font-size: 3rem;\n  color: #ffffff; }\n\n.coinCounter {\n  left: 60%; }\n\n.game_over {\n  display: none;\n  width: 30rem;\n  height: 20rem;\n  border-radius: 5%;\n  position: absolute;\n  left: 35%;\n  top: 15rem;\n  border: 0.2rem solid white;\n  color: #ffffff;\n  text-align: center;\n  background: #0145F3;\n  opacity: 0.8;\n  z-index: 20;\n  padding: 2rem; }\n  .game_over h3 {\n    font-size: 4rem; }\n  .game_over p {\n    font-size: 3rem; }\n  .game_over button {\n    width: 10rem;\n    height: 5rem;\n    border: 0.2rem solid white;\n    border-radius: 0.5rem;\n    margin-top: 3rem; }\n    .game_over button:hover {\n      background: greenyellow; }\n\n.controls-manual {\n  width: 100%;\n  height: 100vh;\n  background: url(" + __webpack_require__(7) + ");\n  background-size: 100% 100%;\n  color: #ffffff;\n  display: flex;\n  flex-direction: column; }\n  .controls-manual h3 {\n    font-size: 4rem; }\n  .controls-manual .how_play {\n    height: 10%;\n    display: flex;\n    justify-content: center;\n    align-items: center; }\n\n.keys-discription {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around; }\n  .keys-discription div {\n    display: flex;\n    justify-content: space-around; }\n  .keys-discription figure {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    flex-direction: column;\n    font-size: 2rem;\n    width: 25%; }\n    .keys-discription figure figcaption {\n      text-align: center; }\n\n.screenshots {\n  width: 100%;\n  height: 100vh;\n  background: url(" + __webpack_require__(16) + ");\n  background-size: 100% 100%;\n  color: #ffffff;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around; }\n  .screenshots div {\n    display: flex;\n    justify-content: space-around; }\n  .screenshots img {\n    width: 40rem;\n    height: 20rem; }\n  .screenshots figcaption {\n    font-size: 2rem;\n    text-align: center; }\n\n.other-info {\n  width: 100%;\n  height: 100vh;\n  background: url(" + __webpack_require__(17) + ");\n  background-size: 100% 100%;\n  color: #ffffff;\n  display: flex;\n  flex-direction: column; }\n  .other-info img {\n    width: 80rem;\n    height: 50rem;\n    margin: auto; }\n  .other-info div {\n    width: 100%;\n    height: 10rem;\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n  .other-info h2 {\n    font-size: 3rem;\n    text-align: center;\n    border: 0.2rem solid #ffffff;\n    border-radius: 1rem;\n    padding: 1rem;\n    background: goldenrod; }\n\n.bg {\n  width: 100%;\n  height: 100vh;\n  background: url(" + __webpack_require__(7) + ");\n  background-size: 100% 100%;\n  display: none; }\n\nfooter {\n  width: 100%;\n  height: 5rem;\n  background: mediumblue; }\n  footer h3 {\n    color: #ffffff;\n    font-size: 3rem;\n    text-align: center; }\n\n.displayNone {\n  display: none; }\n\n.displayBlock {\n  display: block; }\n", ""]);
+exports.push([module.i, "* {\n  vertical-align: baseline;\n  font-weight: inherit;\n  font-style: inherit;\n  border: 0 none;\n  outline: 0;\n  padding: 0;\n  margin: 0; }\n\nhtml {\n  font-size: 10px; }\n\nbody {\n  background: url(" + __webpack_require__(7) + ");\n  background-size: 100% 100%;\n  overflow-x: hidden; }\n\na {\n  text-decoration: none; }\n\n.display-flex-center, .wrapper nav .button-start-description div, .wrapper nav .button-start-description button, .wrapper nav .game-name {\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.wrapper {\n  background: url(" + __webpack_require__(15) + ");\n  opacity: 0.9;\n  background-size: 100% 100%;\n  width: 100%;\n  height: 100vh;\n  margin-bottom: 5rem; }\n  .wrapper nav {\n    display: flex;\n    justify-content: flex-start;\n    padding-top: 5rem; }\n    .wrapper nav .button-start-description div, .wrapper nav .button-start-description button {\n      width: 20rem;\n      margin-bottom: 2rem;\n      margin-left: 18rem;\n      height: 6rem;\n      color: white;\n      border: 2px solid silver;\n      border-radius: 2rem;\n      font-size: 2rem;\n      background: rgba(0, 180, 254, 0.6); }\n      .wrapper nav .button-start-description div:hover, .wrapper nav .button-start-description button:hover {\n        background: rgba(0, 180, 254, 0.9);\n        cursor: pointer; }\n    .wrapper nav a {\n      color: #ffffff; }\n    .wrapper nav .game-name {\n      color: white;\n      font-size: 10rem;\n      flex-direction: column;\n      margin-left: 5rem;\n      font-family: \"Brush Script MT\"; }\n\n.button-up {\n  display: none;\n  width: 20rem;\n  margin-bottom: 2rem;\n  margin-left: 18rem;\n  height: 6rem;\n  color: white;\n  border: 2px solid silver;\n  border-radius: 2rem;\n  font-size: 2rem;\n  background: rgba(0, 180, 254, 0.6); }\n\n.button-pageUp-position-fixed {\n  display: block;\n  position: fixed;\n  left: -10rem;\n  top: 10rem; }\n\n.button-start-position-fixed {\n  position: fixed;\n  right: 5rem;\n  top: 10rem; }\n\n.loading {\n  display: none;\n  width: 200px;\n  height: 200px;\n  color: red;\n  font-size: 2rem; }\n\n.canvas {\n  display: none;\n  position: absolute;\n  z-index: 1; }\n\n.starsCounter, .coinCounter {\n  width: 20rem;\n  height: 5rem;\n  position: absolute;\n  z-index: 10;\n  left: 30%;\n  display: none;\n  font-size: 3rem;\n  color: #ffffff; }\n\n.coinCounter {\n  left: 60%; }\n\n.game_over {\n  display: none;\n  width: 30rem;\n  height: 20rem;\n  border-radius: 5%;\n  position: absolute;\n  left: 35%;\n  top: 15rem;\n  border: 0.2rem solid white;\n  color: #ffffff;\n  text-align: center;\n  background: #0145F3;\n  opacity: 0.8;\n  z-index: 20;\n  padding: 2rem; }\n  .game_over h3 {\n    font-size: 4rem; }\n  .game_over p {\n    font-size: 3rem; }\n  .game_over button {\n    width: 10rem;\n    height: 5rem;\n    border: 0.2rem solid white;\n    border-radius: 0.5rem;\n    margin-top: 3rem; }\n    .game_over button:hover {\n      background: greenyellow; }\n\n.game_win {\n  display: none;\n  width: 30rem;\n  height: 20rem;\n  border-radius: 5%;\n  position: absolute;\n  left: 35%;\n  top: 15rem;\n  border: 0.2rem solid white;\n  color: #ffffff;\n  text-align: center;\n  background: #0145F3;\n  opacity: 0.8;\n  z-index: 20;\n  padding: 2rem;\n  font-size: 4rem; }\n\n.wrapper_2 {\n  background: url(" + __webpack_require__(7) + ");\n  background-size: 100% 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n\n.controls-manual {\n  width: 80%;\n  height: 100vh;\n  border: 0.2rem solid #ffffff;\n  border-radius: 1rem;\n  background: url(" + __webpack_require__(8) + ");\n  background-size: 100% 100%;\n  color: #ffffff;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 5rem; }\n  .controls-manual h3 {\n    font-size: 4rem; }\n  .controls-manual .how_play {\n    height: 10%;\n    display: flex;\n    justify-content: center;\n    align-items: center; }\n\n.keys-discription {\n  height: 90%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around; }\n  .keys-discription div {\n    display: flex;\n    justify-content: space-around; }\n  .keys-discription figure {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    flex-direction: column;\n    font-size: 2rem;\n    width: 25%; }\n    .keys-discription figure figcaption {\n      text-align: center; }\n\n.screenshots {\n  width: 80%;\n  height: 100vh;\n  border: 0.2rem solid #ffffff;\n  border-radius: 1rem;\n  background: url(" + __webpack_require__(16) + ");\n  background-size: 100% 100%;\n  color: #ffffff;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-around;\n  margin-bottom: 5rem; }\n  .screenshots .first {\n    display: flex;\n    justify-content: space-around; }\n  .screenshots .second {\n    display: flex;\n    justify-content: space-around; }\n    .screenshots .second figure {\n      width: 25%; }\n  .screenshots img {\n    width: 25rem;\n    height: 20rem; }\n  .screenshots figcaption {\n    font-size: 2rem;\n    text-align: center; }\n\n.other-info {\n  width: 80%;\n  height: 100vh;\n  border: 0.2rem solid #ffffff;\n  border-radius: 1rem;\n  background: url(" + __webpack_require__(17) + ");\n  background-size: 100% 100%;\n  color: #ffffff;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 5rem; }\n  .other-info img {\n    width: 80rem;\n    height: 50rem;\n    margin: auto;\n    border-radius: 1.5rem; }\n  .other-info div {\n    width: 100%;\n    height: 10rem;\n    display: flex;\n    align-items: center;\n    justify-content: center; }\n  .other-info h2 {\n    font-size: 3rem;\n    text-align: center;\n    border: 0.2rem solid #ffffff;\n    border-radius: 1rem;\n    padding: 1rem;\n    background: goldenrod; }\n\n.bg {\n  width: 100%;\n  height: 100vh;\n  background: url(" + __webpack_require__(8) + ");\n  background-size: 100% 100%;\n  display: none; }\n\nfooter {\n  width: 100%;\n  height: 5rem;\n  background: mediumblue; }\n  footer h3 {\n    color: #ffffff;\n    font-size: 3rem;\n    text-align: center; }\n\n.displayNone {\n  display: none; }\n\n.displayBlock {\n  display: block; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 /*
@@ -1124,12 +1135,6 @@ function toComment(sourceMap) {
 	return '/*# ' + data + ' */';
 }
 
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/bg-in-game.png";
 
 /***/ }),
 /* 15 */
@@ -1661,22 +1666,6 @@ var hideLoading = exports.hideLoading = function hideLoading() {
     loadingWindiw.classList.toggle('displayBlock');
 };
 
-// let gameTime = 0;
-//
-// export const update = function (dt) {
-//     gameTime += dt;
-//     console.log(gameTime);
-// };
-
-
-// export const createBg = function () {
-//     let image = new Image();
-//     image.src = bgInGame;
-//     const pattern = context.createPattern(image, 'no-repeat');
-//     context.fillStyle = pattern;
-//     context.fillRect(0, 0, canvasWidth, canvasHeight);
-// };
-
 /***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1697,7 +1686,9 @@ var _imagesConstructor2 = _interopRequireDefault(_imagesConstructor);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-
+/**
+ * Created by Dima on 02.12.2017.
+ */
 
 var create = exports.create = function create() {
     var image = new Image();
@@ -1707,103 +1698,6 @@ var create = exports.create = function create() {
     sprite.draw('bricks', _consts.context, 30, 50);
     console.log();
 };
-
-// export const loadImage = function(url) {
-//     //waiting load the image
-//     return  new Promise(resolve => {
-//         const image = new Image();
-//         image.addEventListener('load', () => {
-//            resolve(image);
-//         });
-//         image.src = url;
-//     });
-// };
-
-// function foo(url) {
-//     let img = new Image();
-//     img.src = url;
-//
-//     img.onload = function () {
-//         context.drawImage(img, 0, 0, 25, 40, 0, 0, 46, 60);
-//     }
-//
-// }
-
-
-// const moveMario = function (src, x1) {
-//     let img = new Image();
-//     img.src = src;
-//     img.addEventListener('load', () => {
-//         context.drawImage(img,
-//             x1, 4,
-//             18, 30, // the size of image
-//             100, 50, // the distance of top and left
-//             46 , 60 // width and height of image
-//         );
-//     });
-//
-// };
-//
-// let x1 = 120;
-//
-// // moveMario(spriteMarioUrl,x1);
-//
-// const requestId  = requestAnimationFrame(
-//
-//     function repeat() {
-//         context.clearRect(100,50,46,60);
-//         moveMario(spriteMarioUrl,x1);
-//         x1 == 156 ? x1 = 120 : x1 += 18;
-//         setTimeout(repeat,200);
-//     }
-// );
-
-
-//sprite with elements of map
-// loadImage('../public/images/sprite-all-elem.png')
-//     .then(image => {
-//         const sprite = new ImagesConstructor(image, 30, 30);
-//         sprite.define('bricks', 9.15, 0);
-//         sprite.draw('bricks', context, 30, 50);
-//     });
-
-// //Sprite with Mario
-// loadImage('../public/images/mario-sprite.png')
-//     .then(image => {
-//         const sprite = new ImagesConstructor(image, 20, 35);
-//         sprite.define('bricks', 0, 0);
-//         sprite.draw('bricks', context, 50, 50);
-//     });
-
-
-// const canvas2 = document.createElement('canvas');
-// const context2 = canvas2.getContext('2d');
-// canvas2.classList.add('forExample');
-// document.getElementsByTagName('body')[0].appendChild(canvas2);
-//
-// const  loader = function () {
-//     context2.drawImage('../public/images/mario-sprite.png', 16, 16, 0, 0, 0 ,0 ,10 ,10 );
-// };
-//
-// loader();
-
-
-// loadImage('../public/images/mario-sprite.png')
-//     .then(image => {
-//         context2.drawImage(image,
-//             135, 0,
-//             30, 30, // the size of image
-//             50, 50, // the distance of top and left
-//             150 , 100 // width and height of image
-//         );
-//     });
-
-
-// loadImage('../public/images/bg-in-game.jpg')
-//     .then(image => {
-//         context.drawImage(image, 0, 0, 1000, 700);
-//
-//     });
 
 /***/ }),
 /* 22 */
@@ -1816,8 +1710,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by Dima on 04.12.2017.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
 var _consts = __webpack_require__(0);
 
@@ -1884,8 +1779,9 @@ var imagesLoader = exports.imagesLoader = function imagesLoader(arr) {
         });
     });
     return Promise.all(promises);
+}; /**
+    * Created by Dima on 06.12.2017.
+    */
 
-};
-
- })
-]);
+/***/ })
+/******/ ]);

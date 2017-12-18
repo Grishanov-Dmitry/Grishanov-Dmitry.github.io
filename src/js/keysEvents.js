@@ -31,7 +31,7 @@ export const checkKeys = function () {
                 switch(key) {
                     case '87':
                         if(!marioHero.goDown) marioHero.goUp = true;  //Button W
-                        // audioJump.play();
+                        audioJump.play();
                         break;
                     case '83': //Button S
                         goToSecondLevel();

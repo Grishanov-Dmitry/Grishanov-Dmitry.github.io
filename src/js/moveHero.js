@@ -16,6 +16,7 @@ export let animation = {
 export const marioHero = {};
 
 export const drawMario = function () {
+    marioHero.checkQueen = false;
     marioHero.moveOnlyDown = false;
     marioHero.canOpenDoor = false;
     marioHero.goUp = false;
@@ -35,11 +36,6 @@ export const stopMario = function () {
     context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1] , 45, 50); // Here maybe a mistake
     marioHero.mario.posX = 102;
     marioHero.mario.define();
-    // debugger;
-    // brickAll.splice(brickAll.indexOf(1900, 550), 1);
-    // brickAll.splice(brickAll.indexOf(1900, 500), 1);
-    // brickAll.splice(brickAll.indexOf([1900, 500]), 1);
-    // brickAll.splice(brickAll.indexOf([1900, 500]), 1);
     console.log(brickAll);
 };
 
@@ -115,13 +111,15 @@ export const fallMario = function () {
 };
 
 export const goToSecondLevel = function () {
-    // console.log(marioHero.coordMario);
+
     if(marioHero.coordMario[0] > 1500 && marioHero.coordMario[0] < 1550 && marioHero.coordMario[1] === 450) {
+        context.clearRect(marioHero.coordMario[0],marioHero.coordMario[1], 50, 50);
         marioHero.coordMario[1] = 680;
         marioHero.mario.define();
     }
 
-    if(marioHero.coordMario[0] > 1600 && marioHero.coordMario[0] < 1700 && marioHero.coordMario[1] === 800) {
+    if(marioHero.coordMario[0] > 1500 && marioHero.coordMario[0] < 1600 && marioHero.coordMario[1] === 800) {
+        context.clearRect(marioHero.coordMario[0],marioHero.coordMario[1], 50, 50);
         marioHero.coordMario[1] = 450;
         marioHero.coordMario[0] = 1500;
         marioHero.mario.define();
@@ -129,13 +127,10 @@ export const goToSecondLevel = function () {
 };
 
 export const openDoor = function () {
-    if(counter2Value === 50 && counter1Value === 2) {
-        let image = new Image();
-        image.src = sprite3Url;
-        context.clearRect(950, 550, 50, 50);
-        context.drawImage(image, 722, 225, 49, 52, 1900, 550, 50, 50);
+    if(counter2Value === 2) {
+        marioHero.canOpenDoor = true;
     }
-    marioHero.canOpenDoor = true;
+
 
 };
 
@@ -143,8 +138,13 @@ export const open = function () {
 
     if(marioHero.canOpenDoor) {
         if(marioHero.coordMario[0] > 1950 && marioHero.coordMario[1] === 550) {
+            let image = new Image();
+            image.src = sprite3Url;
+            context.clearRect(1950, 550, 150, 50);
+            context.drawImage(image, 722, 225, 49, 52, 1900, 550, 50, 50);
             marioHero.coordMario[0] = 1850;
             marioHero.mario.define();
+            marioHero.checkQueen = true;
         }
     }
 
