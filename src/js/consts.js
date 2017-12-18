@@ -4,7 +4,7 @@
 
 //Buttons and fields
 export const buttonStart = document.getElementById('button-start');
-// export const buttonStart = document.getElementById('button-start');
+export const footer = document.getElementById('footer');
 export const buttonStartAgain = document.getElementById('button__start_again');
 export const buttonFullScreen = document.getElementById('button-full-screen');
 export const wrapper = document.getElementById('wrapper');

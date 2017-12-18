@@ -2,7 +2,7 @@ import './../sass/styles.scss';
 import {buttonStart, buttonFullScreen, context, allSpritesUrl, bgInGame, spriteMarioUrl, canvas, coord, pageCoord, pageUp, buttonStartAgain, gameOver, body} from './consts';
 import {cleanWindow, showCanvas, launchFullScreen, createBg, update, clearCanvas} from './logic';
 import {loadImage, create} from './loaders';
-import {mario, moveMarioRight, drawMario, animation, jumpMario, mariodown, marioHero, marioDownUntilGround} from './moveHero';
+import {mario, moveMarioRight, drawMario, animation, jumpMario, mariodown, marioHero, marioDownUntilGround, open} from './moveHero';
 import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
 import {keys, checkKeys, keysDown, lastPressButton} from './keysEvents';
@@ -38,6 +38,7 @@ const mainLoop = function () {
     crashOfEntities();
     crashWithCoin();
     crashWithStar();
+    open();
     if(marioHero.goUp)  jumpMario();
     if(marioHero.goDown) mariodown();
     checkTouchGround();

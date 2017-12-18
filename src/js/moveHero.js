@@ -5,7 +5,7 @@ import constructorOfEntities from './constructorOfEntities';
 import {spriteMarioUrl, context, sprite3Url} from './consts';
 import {counter} from './index';
 import {lastPressButton} from './keysEvents';
-import {crashMarioWithBrick, checkTouchGround} from './changeCrash';
+import {crashMarioWithBrick, checkTouchGround, counter2Value, counter1Value } from './changeCrash';
 import {moveRecRight, moveRecLeft, camera} from './camera';
 import {brickAll} from './drawMap';
 
@@ -17,6 +17,7 @@ export const marioHero = {};
 
 export const drawMario = function () {
     marioHero.moveOnlyDown = false;
+    marioHero.canOpenDoor = false;
     marioHero.goUp = false;
     marioHero.goDown = false;
     marioHero.canGoRight = true;
@@ -34,7 +35,12 @@ export const stopMario = function () {
     context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1] , 45, 50); // Here maybe a mistake
     marioHero.mario.posX = 102;
     marioHero.mario.define();
-
+    // debugger;
+    // brickAll.splice(brickAll.indexOf(1900, 550), 1);
+    // brickAll.splice(brickAll.indexOf(1900, 500), 1);
+    // brickAll.splice(brickAll.indexOf([1900, 500]), 1);
+    // brickAll.splice(brickAll.indexOf([1900, 500]), 1);
+    console.log(brickAll);
 };
 
 export const moveMarioRight = function () {
@@ -109,7 +115,7 @@ export const fallMario = function () {
 };
 
 export const goToSecondLevel = function () {
-    console.log(marioHero.coordMario);
+    // console.log(marioHero.coordMario);
     if(marioHero.coordMario[0] > 1500 && marioHero.coordMario[0] < 1550 && marioHero.coordMario[1] === 450) {
         marioHero.coordMario[1] = 680;
         marioHero.mario.define();
@@ -122,9 +128,25 @@ export const goToSecondLevel = function () {
     }
 };
 
-export const ruinWall = function () {
-    brickAll.splice(brickAll.indexOf([1900, 550]), 1);
-    brickAll.splice(brickAll.indexOf([1900, 500]), 1);
+export const openDoor = function () {
+    if(counter2Value === 50 && counter1Value === 2) {
+        let image = new Image();
+        image.src = sprite3Url;
+        context.clearRect(950, 550, 50, 50);
+        context.drawImage(image, 722, 225, 49, 52, 1900, 550, 50, 50);
+    }
+    marioHero.canOpenDoor = true;
+
 };
 
-ruinWall();
+export const open = function () {
+
+    if(marioHero.canOpenDoor) {
+        if(marioHero.coordMario[0] > 1950 && marioHero.coordMario[1] === 550) {
+            marioHero.coordMario[0] = 1850;
+            marioHero.mario.define();
+        }
+    }
+
+};
+

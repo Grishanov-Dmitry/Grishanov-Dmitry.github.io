@@ -173,7 +173,7 @@ a {
 .controls-manual {
   width: 100%;
   height: 100vh;
-  background: url("../../public/images/bg-in-menu-5.jpg");
+  background: url("../../public/images/bg-in-menu-2.jpg");
   background-size: 100% 100%;
   color: #ffffff;
   display: flex;
@@ -255,6 +255,31 @@ a {
   background-size: 100% 100%;
   color: #ffffff;
   display: flex;
+  flex-direction: column;
+
+  img {
+    width: 80rem;
+    height: 50rem;
+    margin: auto;
+  }
+
+  div {
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  h2 {
+    font-size: 3rem;
+    text-align: center;
+    border: 0.2rem solid #ffffff;
+    border-radius: 1rem;
+    padding: 1rem;
+    background: goldenrod;
+  }
 }
 
 .bg {
@@ -280,7 +305,17 @@ a {
 
 
 
+footer {
+  width: 100%;
+  height: 5rem;
+  background: mediumblue;
 
+  h3 {
+    color: #ffffff;
+    font-size: 3rem;
+    text-align: center;
+  }
+}
 
 
 

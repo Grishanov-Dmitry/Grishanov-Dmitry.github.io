@@ -3,15 +3,15 @@
  */
 
 import {obj1} from './enemies';
-import {marioHero, fallMario, animation, stopMario, marioDownUntilGround} from './moveHero';
+import {marioHero, fallMario, animation, stopMario, marioDownUntilGround, openDoor} from './moveHero';
 import {obj} from './enemies';
 import {coordMarioStart, context, counter1, counter2, audioCoin, audioCrash, audioJump, audioMenu, audioWin, gameOver} from './consts';
 import {enemies, changePosToRight, changePosToLeft} from './enemies';
 import {brickqQuestCoord, brickAll, brickCoinArr, brickStarArr} from './drawMap';
 import {keysDown, lastPressButton} from './keysEvents';
 
-let counter1Value = 0;
-let counter2Value = 0;
+export let counter1Value = 0;
+export let counter2Value = 0;
 
 export const crashOfEntities = function () {
 
@@ -163,8 +163,11 @@ export const crashWithCoin = function () {
             brickCoinArr.splice(brickCoinArr.indexOf(item), 1);
             counter2Value++;
             counter2.innerHTML = counter2Value + ' ';
+            debugger;
+            openDoor();
         }
     });
+
 };
 
 export const crashWithStar = function () {

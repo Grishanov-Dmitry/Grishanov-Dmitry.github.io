@@ -28,6 +28,7 @@ const tube_2 = new constructorOfEntities(sprite3Url, 759, 6, 31, 31, [x, y], 50,
 const tube_3 = new constructorOfEntities(sprite3Url, 728, 37, 31, 31, [x, y], 50, 50);
 const tube_4 = new constructorOfEntities(sprite3Url, 759, 37, 31, 31, [x, y], 50, 50);
 const queen = new constructorOfEntities(sprite3Url, 623, 51, 53, 53, [x, y], 50, 50);
+const door = new constructorOfEntities(sprite3Url, 651, 226, 55, 51, [x, y], 50, 50);
 
 
 
@@ -57,6 +58,7 @@ entity.set(10, tube_2);
 entity.set(11, tube_3);
 entity.set(12, tube_4);
 entity.set(13, queen);
+entity.set(14, door);
 
 
 const addHindrance = function (item, obj) {
