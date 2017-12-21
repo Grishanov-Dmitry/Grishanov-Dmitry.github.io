@@ -19,6 +19,7 @@ export const starsCounter = document.getElementById('starsCounter');
 export const coinCounter = document.getElementById('coinCounter');
 export const counter1 = document.getElementById('counter1');
 export const counter2 = document.getElementById('counter2');
+export const loadingWindiw = document.getElementById('loading');
 
 
 //Audio
@@ -50,7 +51,7 @@ export const allSpritesUrl = [
     '../public/images/bg-in-game.png',
 ];
 
-export const loadingWindiw = document.getElementById('loading');
+
 
 
 
