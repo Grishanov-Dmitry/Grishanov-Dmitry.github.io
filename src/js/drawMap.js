@@ -90,7 +90,6 @@ const addHindrance = function (item, obj) {
   }
 };
 
-const exampleArr = [];
 
 //Draws map
 export const drawMap = function (map) {
@@ -100,9 +99,8 @@ export const drawMap = function (map) {
 
             let entityInstance = entity.get(itemInner);
             addHindrance(itemInner, entityInstance);
-            debugger;
+            // debugger;
             let createElem = entityInstance.createElem.bind(entityInstance, x, y, q);
-            exampleArr.push(createElem);
             createElem();
 
             x += 50;
@@ -113,7 +111,6 @@ export const drawMap = function (map) {
 
     });
 
-    console.log(exampleArr);
 };
 
 

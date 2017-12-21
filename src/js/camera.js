@@ -2,6 +2,7 @@
  * Created by Dima on 10.12.2017.
  */
 
+import {marioHero} from './moveHero';
 
 export const camera = {
     x: 0,
@@ -16,13 +17,17 @@ export const camera = {
 //Move camera to the right
 export const moveRecRight = function () {
     camera.move(-3);
-    canvas.style.left = camera.x + 'px';
+   if(marioHero.canGoRight) {
+       canvas.style.left = camera.x + 'px';
+   }
 };
 
 //Move camera to the left
 export const moveRecLeft = function () {
     camera.move(3);
-    canvas.style.left = camera.x + 'px';
+    if(marioHero.canGoLeft) {
+        canvas.style.left = camera.x + 'px';
+    }
 
 };
 

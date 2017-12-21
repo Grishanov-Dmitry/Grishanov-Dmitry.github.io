@@ -42,7 +42,7 @@ export const stopMario = function () {
 export const moveMarioRight = function () {
 
 
-    if(marioHero.coordMario[0] > 700) {
+    if(marioHero.coordMario[0] > 500) {
         moveRecRight();
     }
 
@@ -102,12 +102,13 @@ export const mariodown = function () {
 };
 
 export const fallMario = function () {
-    animation.animation = false;
 
     marioHero.coordOnsprite = [6, 113];
     marioHero.mario = new constructorOfEntities(spriteMarioUrl, marioHero.coordOnsprite[0], marioHero.coordOnsprite[1], 24, 32, marioHero.coordMario, 50, 50);
-    context.clearRect(marioHero.coordMario[0] - 5, marioHero.coordMario[1], 45, 50);
+    context.clearRect(marioHero.coordMario[0], marioHero.coordMario[1], 50, 50);
     marioHero.mario.define();
+    animation.animation = false;
+
 };
 
 export const goToSecondLevel = function () {

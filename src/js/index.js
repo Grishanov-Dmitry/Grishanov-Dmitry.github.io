@@ -6,7 +6,7 @@ import {mario, moveMarioRight, drawMario, animation, jumpMario, mariodown, mario
 import {imagesLoader,hideLoading} from './imagesLoader';
 import constructorOfEntities from './constructorOfEntities';
 import {keys, checkKeys, keysDown, lastPressButton} from './keysEvents';
-import {drawMap, moveBrickStar} from './drawMap';
+import {drawMap, moveBrickStar, exampleArr} from './drawMap';
 import {moveRec, camera} from './camera';
 import {enemies,startMoveEnemies} from './enemies';
 import {crashOfEntities, checkTouchGround, crashWithCoin, crashWithStar, checkTouchQueen} from './changeCrash';
